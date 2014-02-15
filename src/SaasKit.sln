@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit", "SaasKit\SaasKit.csproj", "{C1C0A207-E53C-4FB4-A410-6254CFEE30A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6947A43E-AAC9-492F-9225-5EC0F07FE13A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{5FEE28CA-7ADF-4D70-9710-E4C0E7830996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Demos.Nancy", "Demos\SaasKit.Demos.Nancy\SaasKit.Demos.Nancy.csproj", "{DB0103FB-DA35-4DE3-A24E-DD477267F930}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Demos.AspNet", "Demos\SaasKit.Demos.AspNet\SaasKit.Demos.AspNet.csproj", "{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Integration.Nancy", "SaasKit.Integration.Nancy\SaasKit.Integration.Nancy.csproj", "{3994DCC4-CF23-448F-A61B-4EB2334EDAA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1C0A207-E53C-4FB4-A410-6254CFEE30A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1C0A207-E53C-4FB4-A410-6254CFEE30A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1C0A207-E53C-4FB4-A410-6254CFEE30A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1C0A207-E53C-4FB4-A410-6254CFEE30A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0103FB-DA35-4DE3-A24E-DD477267F930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0103FB-DA35-4DE3-A24E-DD477267F930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0103FB-DA35-4DE3-A24E-DD477267F930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0103FB-DA35-4DE3-A24E-DD477267F930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3994DCC4-CF23-448F-A61B-4EB2334EDAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3994DCC4-CF23-448F-A61B-4EB2334EDAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3994DCC4-CF23-448F-A61B-4EB2334EDAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3994DCC4-CF23-448F-A61B-4EB2334EDAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DB0103FB-DA35-4DE3-A24E-DD477267F930} = {5FEE28CA-7ADF-4D70-9710-E4C0E7830996}
+		{2502D64D-EBB0-4DD4-8D69-FD2228CE87A1} = {5FEE28CA-7ADF-4D70-9710-E4C0E7830996}
+	EndGlobalSection
+EndGlobal
