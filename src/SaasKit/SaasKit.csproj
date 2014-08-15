@@ -55,7 +55,7 @@
     <Compile Include="IInstanceStore.cs" />
     <Compile Include="ISaasKitEngine.cs" />
     <Compile Include="Model\ITenant.cs" />
-    <Compile Include="Model\ITenantResolver.cs" />
+    <Compile Include="ITenantResolver.cs" />
     <Compile Include="MemoryCacheInstanceStore.cs" />
     <Compile Include="OwinContextExtensions.cs" />
     <Compile Include="SaasKitOwinAdapter.cs" />
