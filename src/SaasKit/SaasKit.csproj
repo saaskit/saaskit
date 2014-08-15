@@ -54,8 +54,8 @@
     <Compile Include="InstanceLifetimeOptions.cs" />
     <Compile Include="IInstanceStore.cs" />
     <Compile Include="ISaasKitEngine.cs" />
-    <Compile Include="ITenant.cs" />
-    <Compile Include="ITenantResolver.cs" />
+    <Compile Include="Model\ITenant.cs" />
+    <Compile Include="Model\ITenantResolver.cs" />
     <Compile Include="MemoryCacheInstanceStore.cs" />
     <Compile Include="OwinContextExtensions.cs" />
     <Compile Include="SaasKitOwinAdapter.cs" />
@@ -64,8 +64,7 @@
     <Compile Include="SaasKitConfiguration.cs" />
     <Compile Include="SaasKitEngine.cs" />
     <Compile Include="RequestIdentificationStrategies.cs" />
-    <Compile Include="Tenant.cs" />
-    <Compile Include="TenantInstance.cs" />
+    <Compile Include="Model\Tenant.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

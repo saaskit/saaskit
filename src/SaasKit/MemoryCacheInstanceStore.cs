@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Runtime.Caching;
+using SaasKit.Model;
 
 namespace SaasKit
 {
-    public class MemoryCacheInstanceStore : IInstanceStore
+    public class MemoryCacheInstanceStore<T> : IInstanceStore<T> 
+        where T: class, ITenant
     {
         private const string CacheName = "SaasKit.MultiTenantEngine";
         private readonly MemoryCache cache = new MemoryCache(CacheName);
@@ -20,17 +22,17 @@ namespace SaasKit
             this.lifetimeOptions = lifetimeOptions;
         }
 
-        public TenantInstance Get(string requestIdentifier)
+        public T Get(string requestIdentifier)
         {
             if (string.IsNullOrEmpty(requestIdentifier))
             {
                 throw new ArgumentNullException("requestIdentifier");
             }
 
-            return cache.Get(requestIdentifier) as TenantInstance;
+            return cache.Get(requestIdentifier) as T;
         }
 
-        public void Add(TenantInstance instance, Action<string, TenantInstance> removedCallback)
+        public void Add(T instance, Action<string, T> removedCallback)
         {
             if (instance == null)
             {
@@ -58,10 +60,8 @@ namespace SaasKit
 
             // Now cache the running instance for each identifier
             // The policies must be unique since the RemovedCallback can only be called once-per-policy
-            foreach (var id in instance.Tenant.RequestIdentifiers)
-            {
-                cache.Set(new CacheItem(id, instance), GetCacheItemPolicy(removedCallback, cacheDependency));
-            }
+
+            cache.Set(new CacheItem(instance.Id, instance), GetCacheItemPolicy(removedCallback, cacheDependency));
         }
 
         public void Remove(string instanceId)
@@ -74,7 +74,7 @@ namespace SaasKit
             cache.Remove(instanceId);
         }
 
-        private CacheItemPolicy GetCacheItemPolicy(Action<string, TenantInstance> removedCallback, CacheItem cacheDependency)
+        private CacheItemPolicy GetCacheItemPolicy(Action<string, T> removedCallback, CacheItem cacheDependency)
         {
             var policy = new CacheItemPolicy();
 
@@ -87,7 +87,7 @@ namespace SaasKit
                 policy.AbsoluteExpiration = DateTimeOffset.UtcNow.Add(lifetimeOptions.Lifetime);
             }
 
-            policy.RemovedCallback = args => removedCallback(args.CacheItem.Key, args.CacheItem.Value as TenantInstance);
+            policy.RemovedCallback = args => removedCallback(args.CacheItem.Key, args.CacheItem.Value as T);
 
             // make the cache item dependent on the provided cache dependency
             var changeMonitor = cache.CreateCacheEntryChangeMonitor(new[] { cacheDependency.Key });

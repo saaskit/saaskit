@@ -2,6 +2,7 @@
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
 using SaasKit.Integration.Nancy;
+using SaasKit.Model;
 
 namespace SaasKit.Demos.Nancy
 {
@@ -13,8 +14,8 @@ namespace SaasKit.Demos.Nancy
 
             this.Conventions.ViewLocationConventions.Add((viewName, model, context) =>
             {
-                var tenant = context.Context.GetTenantInstance().Tenant;
-                return string.Concat("views/", tenant.Name, "/", viewName);
+                var tenant = context.Context.GetTenantInstance() as Tenant;
+                return string.Concat("views/", tenant.Id, "/", viewName);
             });
         }
     }

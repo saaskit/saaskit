@@ -1,4 +1,5 @@
 ﻿using Owin;
+using SaasKit.Model;
 using System.Threading.Tasks;
 
 namespace SaasKit.Demos.AspNet
@@ -7,7 +8,7 @@ namespace SaasKit.Demos.AspNet
     {
         public void Configuration(IAppBuilder app)
         {
-            var engine = new SaasKitEngine(new SaasKitConfiguration
+            var engine = new SaasKitEngine<Tenant>(new SaasKitConfiguration
             {
                 TenantResolver = new MyResolver()
             });
@@ -22,8 +23,7 @@ namespace SaasKit.Demos.AspNet
         {
             var tenant = new Tenant
             {
-                Name = "Tenant1",
-                RequestIdentifiers = new[] { "localhost", "dev.local" }
+                Id = tenantIdentifier
             };
 
             return Task.FromResult<ITenant>(tenant);

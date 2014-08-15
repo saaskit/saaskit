@@ -1,4 +1,5 @@
 using Owin;
+using SaasKit.Model;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -22,14 +23,14 @@ namespace SaasKit.Demos.Nancy
                 Logger = msg => Console.WriteLine(msg)
             };
 
-            var instanceStore = new MemoryCacheInstanceStore(
+            var instanceStore = new MemoryCacheInstanceStore<Tenant>(
                 new InstanceLifetimeOptions { 
                     Lifetime =  TimeSpan.FromSeconds(30),
                     UseSlidingExpiration = true
                 }
             );
 
-            return new SaasKitEngine(config, instanceStore);
+            return new SaasKitEngine<Tenant>(config, instanceStore);
         }
 
         private HttpConfiguration ConfigureWebApi()
@@ -47,8 +48,7 @@ namespace SaasKit.Demos.Nancy
         {           
             var tenant = new Tenant
             {
-                Name = "Tenant1",
-                RequestIdentifiers = new[] { "localhost", "dev.local" }
+                Id = tenantIdentifier
             };
 
             return Task.FromResult<ITenant>(tenant);

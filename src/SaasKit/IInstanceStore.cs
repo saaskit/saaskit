@@ -1,11 +1,13 @@
 ﻿using System;
+using SaasKit.Model;
 
 namespace SaasKit
 {
-    public interface IInstanceStore
+    public interface IInstanceStore<T> 
+        where T : ITenant 
     {
-        TenantInstance Get(string requestIdentifier);
-        void Add(TenantInstance instance, Action<string, TenantInstance> removedCallback);
+        T Get(string requestIdentifier);
+        void Add(T instance, Action<string, T> removedCallback);
         void Remove(string instanceId);
     }
 }
