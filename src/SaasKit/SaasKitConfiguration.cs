@@ -1,5 +1,6 @@
-﻿
-using System;
+﻿using System;
+using SaasKit.Model;
+
 namespace SaasKit
 {
     public class SaasKitConfiguration

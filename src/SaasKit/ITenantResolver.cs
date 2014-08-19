@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SaasKit.Model;
+using System.Threading.Tasks;
 
 namespace SaasKit
 {
