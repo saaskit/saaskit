@@ -8,7 +8,7 @@ namespace SaasKit.Demos.AspNet
     {
         public void Configuration(IAppBuilder app)
         {
-            var engine = new SaasKitEngine<Tenant>(new SaasKitConfiguration
+            var engine = new SaasKitEngine<BaseTenant>(new SaasKitConfiguration
             {
                 TenantResolver = new MyResolver()
             });
@@ -21,7 +21,7 @@ namespace SaasKit.Demos.AspNet
     {
         public Task<ITenant> Resolve(string tenantIdentifier)
         {
-            var tenant = new Tenant
+            var tenant = new BaseTenant
             {
                 Id = tenantIdentifier
             };

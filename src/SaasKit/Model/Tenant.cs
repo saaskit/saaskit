@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace SaasKit.Model
 {
-    public class Tenant : ITenant
+    public class BaseTenant : ITenant
     {
         public virtual string Id { get; set; }
 

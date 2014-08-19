@@ -23,14 +23,14 @@ namespace SaasKit.Demos.Nancy
                 Logger = msg => Console.WriteLine(msg)
             };
 
-            var instanceStore = new MemoryCacheInstanceStore<Tenant>(
+            var instanceStore = new MemoryCacheInstanceStore<BaseTenant>(
                 new InstanceLifetimeOptions { 
                     Lifetime =  TimeSpan.FromSeconds(30),
                     UseSlidingExpiration = true
                 }
             );
 
-            return new SaasKitEngine<Tenant>(config, instanceStore);
+            return new SaasKitEngine<BaseTenant>(config, instanceStore);
         }
 
         private HttpConfiguration ConfigureWebApi()
@@ -46,7 +46,7 @@ namespace SaasKit.Demos.Nancy
     {
         public Task<ITenant> Resolve(string tenantIdentifier)
         {           
-            var tenant = new Tenant
+            var tenant = new BaseTenant
             {
                 Id = tenantIdentifier
             };
