@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         ToolsVersion="4.0"
+         DefaultTargets="Default">
+
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))</SolutionDir>
+    <ScriptsDir>$(SolutionDir)\build</ScriptsDir>
+    <NugetExeDir>$(SolutionDir)\.nuget</NugetExeDir>
+    <Solutionfile>$(SolutionDir)\SaasKit.sln</Solutionfile>
+    <BuildArtifactsDir>$(SolutionDir)\artifacts</BuildArtifactsDir>
+    <NuGetPackageOutputDir>$(BuildArtifactsDir)\packages</NuGetPackageOutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AppProjFiles Include="$(SolutionDir)\src\**\*.csproj" />
+    <TestProjFiles Include="$(SolutionDir)\tests\**\*.csproj" />
+    <NuGetPackageProjects Include="$(SolutionDir)\src\SaasKit.Multitenancy\SaasKit.Multitenancy.csproj;$(SolutionDir)\src\SaasKit.Multitenancy.Mvc\SaasKit.Multitenancy.Mvc.csproj;$(SolutionDir)\src\SaasKit.Multitenancy.WebApi\SaasKit.Multitenancy.WebApi.csproj;" />
+  </ItemGroup>
+
+  <Target Name="Default" DependsOnTargets="Compile; Package" />
+  <Target Name="DefaultCI" DependsOnTargets="Compile; Package; PublishPackage" />
+
+  <Target Name="Clean">
+    <RemoveDir Directories="$(BuildArtifactsDir)" />
+  </Target>
+
+  <Target Name="Init" DependsOnTargets="Clean">
+    <MakeDir Directories="$(BuildArtifactsDir);$(NuGetPackageOutputDir)" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Init">
+    <MSBuild Projects="@(AppProjFiles)" Targets="Rebuild" Properties="OutDir=$(BuildArtifactsDir);Configuration=$(Configuration)" />
+    <MSBuild Projects="@(TestProjFiles)" Targets="Rebuild" Properties="Configuration=Debug">
+      <Output PropertyName="TestProjOutputs" TaskParameter="TargetOutputs" />
+    </MSBuild>
+  </Target>
+  
+  <Target Name="Tests" DependsOnTargets="Compile">
+    <PropertyGroup>
+      <NUnitAssemblies>$(TestProjOutputs.Replace(";", " "))</NUnitAssemblies>
+      <NUnitCommand>$(SolutionDir)\packages\\NUnit.Runners.2.6.4\tools\nunit-console.exe $(NUnitAssemblies)</NUnitCommand>
+    </PropertyGroup>
+    <Message Importance="high" Text="Running Tests with this command: $(NUnitCommand)"/>
+    <Exec Command="$(NUnitCommand)" />
+  </Target>
+
+  <Target Name="Package" DependsOnTargets="Compile">
+    <Exec Command="$(NugetExeDir)\nuget.exe pack %(NuGetPackageProjects.FullPath) -Build -OutputDirectory $(NuGetPackageOutputDir) -IncludeReferencedProjects" />
+  </Target>
+</Project>
