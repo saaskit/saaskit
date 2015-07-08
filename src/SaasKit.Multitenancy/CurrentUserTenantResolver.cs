@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy
 {
-    public abstract class CurrentUser<TTenant> : ITenantResolver<TTenant>
+    public abstract class CurrentUserTenantResolver<TTenant> : ITenantResolver<TTenant>
     {
         public abstract Task<TenantContext<TTenant>> ResolveAsync(IPrincipal user);
 

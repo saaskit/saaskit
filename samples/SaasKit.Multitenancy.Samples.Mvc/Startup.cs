@@ -1,5 +1,7 @@
 ﻿using Owin;
 using System;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.Samples.Mvc
@@ -27,7 +29,7 @@ namespace SaasKit.Multitenancy.Samples.Mvc
             {
                 tenant = new AppTenant { Name = "Tenant 2" };
             }
-            else
+            else // Default Tenant
             {
                 tenant = new AppTenant { Name = "Tenant 1" };
             }
