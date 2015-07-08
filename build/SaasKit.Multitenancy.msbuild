@@ -46,7 +46,7 @@
     <Exec Command="$(NUnitCommand)" />
   </Target>
 
-  <Target Name="Package" DependsOnTargets="Compile">
+  <Target Name="Package" DependsOnTargets="Tests">
     <Exec Command="$(NugetExeDir)\nuget.exe pack %(NuGetPackageProjects.FullPath) -Build -OutputDirectory $(NuGetPackageOutputDir) -IncludeReferencedProjects" />
   </Target>
 </Project>

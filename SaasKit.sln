@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C54F4DED
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Samples.Mvc", "samples\SaasKit.Multitenancy.Samples.Mvc\SaasKit.Multitenancy.Samples.Mvc.csproj", "{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.csproj", "{FC47A35E-7331-4AF1-B2E5-A7F02A005125}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,11 +46,16 @@ Global
 		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC47A35E-7331-4AF1-B2E5-A7F02A005125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC47A35E-7331-4AF1-B2E5-A7F02A005125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC47A35E-7331-4AF1-B2E5-A7F02A005125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC47A35E-7331-4AF1-B2E5-A7F02A005125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1} = {896022B7-F488-412B-A917-331523E34B0A}
+		{FC47A35E-7331-4AF1-B2E5-A7F02A005125} = {C54F4DED-9700-456C-AA78-4E69BD07353D}
 	EndGlobalSection
 EndGlobal
