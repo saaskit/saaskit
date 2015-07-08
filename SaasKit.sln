@@ -16,6 +16,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Mvc", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.WebApi", "src\SaasKit.Multitenancy.WebApi\SaasKit.Multitenancy.WebApi.csproj", "{D969FF03-03A9-4DF4-9042-BB00F09CCA50}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{896022B7-F488-412B-A917-331523E34B0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C54F4DED-9700-456C-AA78-4E69BD07353D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Samples.Mvc", "samples\SaasKit.Multitenancy.Samples.Mvc\SaasKit.Multitenancy.Samples.Mvc.csproj", "{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +40,15 @@ Global
 		{D969FF03-03A9-4DF4-9042-BB00F09CCA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D969FF03-03A9-4DF4-9042-BB00F09CCA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D969FF03-03A9-4DF4-9042-BB00F09CCA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F72E7862-9B06-4AB3-81A1-AC8B447B50F1} = {896022B7-F488-412B-A917-331523E34B0A}
 	EndGlobalSection
 EndGlobal
