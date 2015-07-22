@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <licenseUrl>https://github.com/saaskit/saaskit/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/saaskit</projectUrl>
+    <copyright>Copyright © Ben Foster 2015</copyright>
+    <tags>SaasKit Multitenancy Multi-tenant Saas</tags>
+  </metadata>
+</package>
