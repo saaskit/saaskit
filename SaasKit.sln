@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy", "src\SaasKit.Multitenancy\SaasKit.Multitenancy.csproj", "{75649D57-67F8-42FF-9751-F1E76127F64E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{78843526-43BB-49AD-A0DD-5C1630F57D4F}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Mvc", "src\SaasKit.Multitenancy.Mvc\SaasKit.Multitenancy.Mvc.csproj", "{F07816BE-1844-48DF-AF87-4A3B772C26A3}"

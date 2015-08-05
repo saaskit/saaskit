@@ -49,7 +49,6 @@
     <Compile Include="Ensure.cs" />
     <Compile Include="ITenantResolver.cs" />
     <Compile Include="AppBuilderExtensions.cs" />
-    <Compile Include="Middleware\TenantNotFoundMiddleware.cs" />
     <Compile Include="OwinEnvironmentExtensions.cs" />
     <Compile Include="Middleware\PrimaryHostnameRedirectMiddleware.cs" />
     <Compile Include="Middleware\TenantNotFoundRedirectMiddleware.cs" />

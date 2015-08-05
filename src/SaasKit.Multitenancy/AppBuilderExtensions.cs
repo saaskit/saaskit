@@ -41,13 +41,5 @@ namespace Owin
 
             return app;
         }
-
-        public static IAppBuilder IfTenantNotFound<TTenant>(this IAppBuilder app, Func<TTenant> tenantFunc)
-        {
-           Ensure.Argument.NotNull(tenantFunc, "tenantFunc");
-           app.Use(typeof (TenantNotFoundMiddleware<TTenant>), tenantFunc);
-
-          return app;
-       }
     }
 }
