@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Owin;
+using System.Collections.Generic;
 
 namespace SaasKit.Multitenancy
 {
    public class TenantNotFoundMiddleware<TTenant>
    {
       private readonly Func<IDictionary<string, object>, Task> next;
-      private readonly Func<TTenant> tenantFunc;
 
-      public TenantNotFoundMiddleware(Func<IDictionary<string, object>, Task> next,
-         Func<TTenant> tenantFunc )
+      private readonly Func<Task<TenantContext<TTenant>>> _tenantFunc;
+
+      public TenantNotFoundMiddleware(
+         Func<IDictionary<string, object>, Task> next,
+         Func<Task<TenantContext<TTenant>>> tenantFunc)
       {
          Ensure.Argument.NotNull(next, "next");
          Ensure.Argument.NotNull(tenantFunc, "tenantFunc");
          this.next = next;
-         this.tenantFunc = tenantFunc;
+         this._tenantFunc = tenantFunc;
       }
 
 
@@ -27,12 +26,8 @@ namespace SaasKit.Multitenancy
 
          var tenantContext = environment.GetTenantContext<TTenant>();
 
-         if (tenantContext == null)
-         {
-
-            tenantFunc();
-
-            return;
+         if (tenantContext == null){
+           _tenantFunc();
          }
          await next(environment);
 
