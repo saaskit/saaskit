@@ -11,7 +11,14 @@ namespace SaasKit.Multitenancy.Samples.Mvc
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseMultitenancy(new AppTenantResolver())
+            var cachedResolver = new CachedTenantResolver<AppTenant>(
+                new AppTenantResolver(),
+                t => t.Hostnames,
+                RequestIdentification.FromHostname()
+            );
+            
+            //app.UseMultitenancy(new AppTenantResolver())
+            app.UseMultitenancy(cachedResolver)
                 .RedirectIfTenantNotFound<AppTenant>("https://github.com/saaskit/saaskit/wiki/Handling-unresolved-Tenants/", permanentRedirect: false);
         }
     }
@@ -19,6 +26,7 @@ namespace SaasKit.Multitenancy.Samples.Mvc
     public class AppTenant
     {
         public string Name { get; set; }
+        public IEnumerable<string> Hostnames { get;set; }
     }
 
     public class AppTenantResolverWithDefaultInstance : UriTenantResolver<AppTenant>
@@ -55,7 +63,8 @@ namespace SaasKit.Multitenancy.Samples.Mvc
 
             if (mappings.TryGetValue(uri.Host, out tenantName))
             {
-                tenantContext = new TenantContext<AppTenant>(new AppTenant { Name = tenantName });
+                tenantContext = new TenantContext<AppTenant>(new AppTenant { Name = tenantName, Hostnames = new[] { uri.Host } });
+                tenantContext.Properties.Add("Created", DateTime.UtcNow);
             }
 
             return Task.FromResult(tenantContext);
