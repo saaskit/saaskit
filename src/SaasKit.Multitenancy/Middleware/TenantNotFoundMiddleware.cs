@@ -24,11 +24,11 @@ namespace SaasKit.Multitenancy
       public async Task Invoke(IDictionary<string, object> environment){
          Ensure.Argument.NotNull(environment, "environment");
 
-         var tenantContext = environment.GetTenantContext<TTenant>();
+         var tenantContext = environment.GetTenantContext<TTenant>() ?? _tenantFunc().Result;
 
-         if (tenantContext == null){
-           _tenantFunc();
-         }
+         if (tenantContext != null)
+            environment.SetTenantContext(tenantContext); 
+
          await next(environment);
 
       }
