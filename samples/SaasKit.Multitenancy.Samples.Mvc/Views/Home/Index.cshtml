@@ -1,8 +1,12 @@
-﻿@model AppTenant
+﻿@model SaasKit.Multitenancy.TenantContext<AppTenant>
 @{
-    ViewBag.Title = "Home";
+  ViewBag.Title = "Home";
 }
 
-<h2>Tenant: @Model.Name</h2>
+<h2>Tenant: @Model.Tenant.Name</h2>
+<p>
+  Created: @Model.Properties["Created"]
+</p>
+
 
 

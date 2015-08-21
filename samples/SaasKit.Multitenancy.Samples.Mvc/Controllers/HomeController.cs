@@ -8,8 +8,8 @@ namespace SaasKit.Multitenancy.Samples.Mvc.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            var tenant = Request.GetTenant<AppTenant>();
-            return View(tenant);
+            var tenantContext = Request.GetTenantContext<AppTenant>();
+            return View(tenantContext);
         }
     }
 }
