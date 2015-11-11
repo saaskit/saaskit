@@ -1,6 +1,6 @@
 ﻿{
 	"version": "1.0.0-*",
-	"description": "SaasKit.Multitenancy.Tests",
+	"description": "SaasKit.Multitenancy.AspNet5.Tests",
 	"authors": [ "Ben Foster" ],
 	"copyright": "Copyright © Ben Foster 2015",
 	"tags": [ "" ],

@@ -30,14 +30,14 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5
 			if (env.IsDevelopment())
 			{
 				app.UseBrowserLink();
-				app.UseErrorPage(new ErrorPageOptions { SourceCodeLineCount = 20 });
+				app.UseDeveloperExceptionPage(new ErrorPageOptions { SourceCodeLineCount = 20 });
 				app.UseRuntimeInfoPage(); // default path is /runtimeinfo
 			}
 			else
 			{
 				// Add Error handling middleware which catches all application specific errors and
 				// sends the request to the following path or controller action.
-				app.UseErrorHandler("/Home/Error");
+				app.UseExceptionHandler("/Home/Error");
 			}
 
 			// Add static files to the request pipeline. (eg css, js files)
@@ -49,11 +49,11 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5
 				t => t.Hostnames,
 				RequestIdentification.FromHostname()
 			)
-			// extra options
+			// extra options around configuring CachedTenantResolver
 			// .SetMemoryCache(new MemoryCache(new MemoryCacheOptions()))
 			// .SetMemoryCacheEntryOptions(new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1))) // eg. sliding cache for 1 hour
 			;
-			
+
 
 			//app.UseMultitenancy(new AppTenantResolver())
 			app.UseMultitenancy(cachedResolver)
@@ -70,6 +70,7 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5
 	{
 		private readonly Dictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 		{
+			// localhost port numbers
 			{ "5000", "Tenant 1"},
 			{ "5001", "Tenant 2"}
 		};

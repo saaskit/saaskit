@@ -3,25 +3,28 @@
 	"version": "1.0.0-*",
 
 	"dependencies": {
-		"Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
-		"Microsoft.AspNet.Mvc": "6.0.0-beta7",
-		"Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
-		"Microsoft.AspNet.Routing": "1.0.0-beta7",
-		"Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
-		"Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-		"Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
-		"Microsoft.AspNet.Tooling.Razor": "1.0.0-beta7",
-		"Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta7",
-		"Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
-		"Microsoft.Framework.Logging": "1.0.0-beta7",
-		"Microsoft.Framework.Logging.Console": "1.0.0-beta7",
-		"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta7",
+		"Microsoft.AspNet.Diagnostics": "1.0.0-beta8",
+		"Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
+		"Microsoft.AspNet.Mvc": "6.0.0-beta8",
+		"Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta8",
+		"Microsoft.AspNet.Routing": "1.0.0-beta8",
+		"Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
+		"Microsoft.AspNet.Server.WebListener": "1.0.0-beta8",
+		"Microsoft.AspNet.StaticFiles": "1.0.0-beta8",
+		"Microsoft.AspNet.Tooling.Razor": "1.0.0-beta8",
+		"Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta8",
+		"Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
+		"Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8",
+		"Microsoft.Framework.Logging": "1.0.0-beta8",
+		"Microsoft.Framework.Logging.Console": "1.0.0-beta8",
+		"Microsoft.Framework.Logging.Debug" : "1.0.0-beta8",
+		"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta8",
 
-		"SaasKit.Multitenancy.AspNet5": "0.0.2-pre"
+		"SaasKit.Multitenancy.AspNet5": ""
 	},
 
 	"commands": {
-		"web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls=http://localhost:5000;http://localhost:5001;http://localhost:5009"
+		"web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:5000;http://localhost:5001;http://localhost:5009"
 	},
 
 	"frameworks": {

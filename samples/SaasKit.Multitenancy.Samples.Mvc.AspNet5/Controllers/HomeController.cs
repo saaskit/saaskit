@@ -8,7 +8,7 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5.Controllers
 		// GET: /<controller>/
 		public IActionResult Index()
 		{
-			var tenantContext = Context.GetTenantContext<AppTenant>();
+			var tenantContext = HttpContext.GetTenantContext<AppTenant>();
 			return View(tenantContext);
 		}
 	}
