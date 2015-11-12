@@ -1,0 +1,35 @@
+{
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
+    },
+    "webTenant1": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:6001",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
+    },
+    "webTenant2": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:6002",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
+    },
+    "webTenant3": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:6003",
+      "environmentVariables": {
+        "ASPNET_ENV": "Development"
+      }
+    }
+  }
+}

@@ -20,16 +20,15 @@
 		"Microsoft.Framework.Logging.Debug": "1.0.0-beta8",
 		"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta8",
 
-		"SaasKit.Multitenancy.AspNet5": ""
+		"SaasKit.Multitenancy.AspNet5.StructureMap": ""
 	},
 
 	"commands": {
-		"web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:5000;http://localhost:5001;http://localhost:5009"
+		"web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:6001;http://localhost:6002;http://localhost:6003;http://localhost:6009"
 	},
 
 	"frameworks": {
-		"dnx451": { },
-		"dnxcore50": { }
+		"dnx451": { }
 	},
 
 	"publishExclude": [
