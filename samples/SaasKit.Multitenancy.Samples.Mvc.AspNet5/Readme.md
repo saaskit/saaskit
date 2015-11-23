@@ -1,6 +1,6 @@
 # Prerequisites
 
-- Install DNVM and set to correct version (beta8 as of time of writing, but check project.json)
+- Install DNVM and set to correct version (rc1-final as of time of writing, but check project.json)
 
 
 #How to run via command line

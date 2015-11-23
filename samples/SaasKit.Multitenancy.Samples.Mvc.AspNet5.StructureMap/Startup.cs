@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Hosting;
-using Microsoft.Framework.Caching.Memory;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
+using Microsoft.AspNet.Http;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SaasKit.Multitenancy.AspNet5;
 using SaasKit.Multitenancy.AspNet5.StructureMap;
 using StructureMap;
@@ -87,8 +88,8 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap
 				RequestIdentification.FromHostname()
 			)
 			// extra options around configuring CachedTenantResolver
-			// .SetMemoryCache(new MemoryCache(new MemoryCacheOptions()))
-			// .SetMemoryCacheEntryOptions(new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1))) // eg. sliding cache for 1 hour
+			.SetMemoryCache(new MemoryCache(new MemoryCacheOptions()))
+			.SetMemoryCacheEntryOptions(new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromHours(1))) // eg. sliding cache for 1 hour
 			;
 
 
@@ -103,24 +104,24 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap
 	}
 
 
-	public class AppTenantResolver : UriTenantResolver<AppTenant>
+	public class AppTenantResolver : HttpRequestTenantResolver<AppTenant>
 	{
 		private readonly Dictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
 		{
 			// localhost port numbers
-			{ "6001", "Tenant 1"},
-			{ "6002", "Tenant 2"},
-			{ "6003", "Tenant 3"}
+			{ "localhost:6001", "Tenant 1"},
+			{ "localhost:6002", "Tenant 2"},
+			{ "localhost:6003", "Tenant 3"}
 		};
 
-		public override Task<TenantContext<AppTenant>> ResolveAsync(Uri uri)
+		public override Task<TenantContext<AppTenant>> ResolveAsync(HttpRequest request)
 		{
 			string tenantName = null;
 			TenantContext<AppTenant> tenantContext = null;
 
-			if (_mappings.TryGetValue(uri.Port.ToString(), out tenantName))
+			if (_mappings.TryGetValue(request.Host.Value, out tenantName))
 			{
-				tenantContext = new TenantContext<AppTenant>(new AppTenant { Name = tenantName, Hostnames = new[] { uri.Host } });
+				tenantContext = new TenantContext<AppTenant>(new AppTenant { Name = tenantName, Hostnames = new[] { request.Host.Value } });
 				tenantContext.Properties.Add("Created", DateTime.UtcNow);
 			}
 

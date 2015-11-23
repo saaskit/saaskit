@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http;
-using Microsoft.Framework.Caching.Memory;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace SaasKit.Multitenancy.AspNet5
 {

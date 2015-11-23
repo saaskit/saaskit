@@ -1,5 +1,5 @@
 ﻿{
-	"version": "1.0.0-beta8-01",
+	"version": "1.0.0-rc1-final",
 	"title": "SaasKit Multitenancy AspNet5",
 	"description": "SaasKit is a developers toolkit for building SaaS (Software As A Service) applications. Use this package to add multi-tenancy support.",
 	"authors": [ "Ben Foster" ],
@@ -9,12 +9,14 @@
 	"licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
 
 	"dependencies": {
-		"Microsoft.Framework.Caching.Memory": "1.0.0-beta8",
-		"Microsoft.AspNet.Http.Extensions": "1.0.0-beta8"
+		"Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
+		"Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+		"Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final"
 	},
-	
+
 	"frameworks": {
-		"dnx451": { },
-		"dnxcore50": {}
+		"net451": { },
+		"dotnet5.4": { },
+		"dnx451": { }
 	}
 }

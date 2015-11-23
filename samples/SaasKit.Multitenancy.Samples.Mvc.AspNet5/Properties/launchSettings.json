@@ -1,20 +1,41 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:53831/",
+      "sslPort": 0
+    }
+  },
   "profiles": {
-	"webTenant1": {
-		"commandName": "web",
-		"launchBrowser": true,
-		"launchUrl": "http://localhost:5000",
-		"environmentVariables": {
-			"ASPNET_ENV": "Development"
-		}
-	},
-	"webTenant2": {
-	  "commandName": "web",
-	  "launchBrowser": true,
-	  "launchUrl": "http://localhost:5001",
-	  "environmentVariables": {
-		"ASPNET_ENV": "Development"
-	  }
-	}
+    "webTenant1": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      }
+    },
+    "webTenant2": {
+      "commandName": "web",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:5001",
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      }
+    },
+    "web": {
+      "commandName": "web",
+      "environmentVariables": {
+        "Hosting:Environment": "Development"
+      }
+    }
   }
 }

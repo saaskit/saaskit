@@ -1,6 +1,6 @@
-﻿using Microsoft.Framework.DependencyInjection;
-using System;
+﻿using System;
 using Microsoft.AspNet.Http;
+using Microsoft.Extensions.DependencyInjection;
 using StructureMap;
 
 namespace SaasKit.Multitenancy.AspNet5.StructureMap

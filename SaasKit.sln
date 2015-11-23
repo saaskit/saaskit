@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24627.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{B9F192D5-F28C-44F8-AA15-6FA0672F4AFD}"
 EndProject
@@ -37,11 +37,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.AspNet
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.AspNet5.Tests", "tests\SaasKit.Multitenancy.AspNet5.Tests\SaasKit.Multitenancy.AspNet5.Tests.xproj", "{14BF41DD-FC05-4D8B-8431-0E8DE43DA9E4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.Samples.Mvc.AspNet5", "samples\SaasKit.Multitenancy.Samples.Mvc.AspNet5\SaasKit.Multitenancy.Samples.Mvc.AspNet5.xproj", "{A3F81531-FD3A-4A54-96FF-682D6FD5D344}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap", "samples\SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap\SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap.xproj", "{B31C0F36-F1A6-4500-AAF7-8A07667A19E9}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.AspNet5.StructureMap", "src\SaasKit.Multitenancy.AspNet5.StructureMap\SaasKit.Multitenancy.AspNet5.StructureMap.xproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.Samples.Mvc.AspNet5", "samples\SaasKit.Multitenancy.Samples.Mvc.AspNet5\SaasKit.Multitenancy.Samples.Mvc.AspNet5.xproj", "{570CFB29-17B4-419A-9CCD-AC1A3D47A36E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,6 @@ Global
 		{14BF41DD-FC05-4D8B-8431-0E8DE43DA9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14BF41DD-FC05-4D8B-8431-0E8DE43DA9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14BF41DD-FC05-4D8B-8431-0E8DE43DA9E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A3F81531-FD3A-4A54-96FF-682D6FD5D344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3F81531-FD3A-4A54-96FF-682D6FD5D344}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3F81531-FD3A-4A54-96FF-682D6FD5D344}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3F81531-FD3A-4A54-96FF-682D6FD5D344}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B31C0F36-F1A6-4500-AAF7-8A07667A19E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B31C0F36-F1A6-4500-AAF7-8A07667A19E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B31C0F36-F1A6-4500-AAF7-8A07667A19E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -89,6 +85,10 @@ Global
 		{B279D429-8CE4-458E-A3CB-355C5E7502B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B279D429-8CE4-458E-A3CB-355C5E7502B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B279D429-8CE4-458E-A3CB-355C5E7502B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570CFB29-17B4-419A-9CCD-AC1A3D47A36E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570CFB29-17B4-419A-9CCD-AC1A3D47A36E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570CFB29-17B4-419A-9CCD-AC1A3D47A36E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570CFB29-17B4-419A-9CCD-AC1A3D47A36E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,7 +97,7 @@ Global
 		{909856C1-3870-4DCF-8DE0-ED0887336716} = {B9F192D5-F28C-44F8-AA15-6FA0672F4AFD}
 		{FC47A35E-7331-4AF1-B2E5-A7F02A005125} = {5259781F-6D70-42B7-83EB-08E54F43B7AA}
 		{14BF41DD-FC05-4D8B-8431-0E8DE43DA9E4} = {5259781F-6D70-42B7-83EB-08E54F43B7AA}
-		{A3F81531-FD3A-4A54-96FF-682D6FD5D344} = {B9F192D5-F28C-44F8-AA15-6FA0672F4AFD}
 		{B31C0F36-F1A6-4500-AAF7-8A07667A19E9} = {B9F192D5-F28C-44F8-AA15-6FA0672F4AFD}
+		{570CFB29-17B4-419A-9CCD-AC1A3D47A36E} = {B9F192D5-F28C-44F8-AA15-6FA0672F4AFD}
 	EndGlobalSection
 EndGlobal

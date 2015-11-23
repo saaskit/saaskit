@@ -1,6 +1,6 @@
 # Prerequisites
 
-- Install DNVM and set to correct version (beta8 as of time of writing, but check project.json)
+- Install DNVM and set to correct version (rc1-final as of time of writing, but check project.json)
 
 
 #How to run via command line
@@ -26,7 +26,7 @@
 
 - Tenant 1: http://localhost:6001
 - Tenant 2: http://localhost:6002
-    - displays different message on the home page to other tenants due to change in StructureMap configuration
+	- displays different message on the home page to other tenants due to change in StructureMap configuration
 - Tenant 3: http://localhost:6003
 - unknown tenant: http://localhost:6009
 
