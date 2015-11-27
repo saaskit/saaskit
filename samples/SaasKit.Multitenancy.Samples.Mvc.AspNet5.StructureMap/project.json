@@ -20,7 +20,6 @@
 		"Microsoft.Extensions.Logging": "1.0.0-rc1-final",
 		"Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
 		"Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
-		"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
 
 		"SaasKit.Multitenancy.AspNet5.StructureMap": ""
 	},
@@ -30,7 +29,12 @@
 	},
 
 	"frameworks": {
-		"dnx451": { }
+		"dnx451": {
+			"dependencies": {
+				"Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final"
+			}
+		},
+		"net451": { }
 	},
 
 	"exclude": [

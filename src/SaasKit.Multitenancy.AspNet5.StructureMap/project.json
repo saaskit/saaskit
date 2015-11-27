@@ -10,11 +10,12 @@
 
 	"dependencies": {
 		"Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
-		"StructureMap.Dnx": "(0.4.0-alpha2,)",
+		"StructureMap.Dnx": "(0.4.0-alpha4,)",
 		"SaasKit.Multitenancy.AspNet5": "1.0.0-rc1-final"
 	},
 
 	"frameworks": {
-		"dnx451": { }
+		"dnx451": { },
+		"net451": { }
 	}
 }

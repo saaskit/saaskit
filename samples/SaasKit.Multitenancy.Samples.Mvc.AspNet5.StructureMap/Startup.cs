@@ -67,7 +67,9 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap
 			// Add the following to the request pipeline only in development environment.
 			if (env.IsDevelopment())
 			{
+				#if DNX451
 				app.UseBrowserLink();
+				#endif
 				app.UseDeveloperExceptionPage(new ErrorPageOptions { SourceCodeLineCount = 20 });
 				app.UseRuntimeInfoPage(); // default path is /runtimeinfo
 			}
@@ -101,6 +103,9 @@ namespace SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap
 			// Add MVC and routes to the request pipeline.
 			app.UseMvc(routes => AppStart.RouteConfig.Setup(routes));
 		}
+
+		// Entry point for the application.
+		public static void Main(string[] args) => WebApplication.Run<Startup>(args);
 	}
 
 
