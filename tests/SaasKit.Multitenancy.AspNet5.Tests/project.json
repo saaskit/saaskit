@@ -9,7 +9,7 @@
 
 
 	"dependencies": {
-		"NUnit": "3.0.0-*",
+		"NUnit":  "3.0.0",
 		"SaasKit.Multitenancy.AspNet5": ""
 	},
 
