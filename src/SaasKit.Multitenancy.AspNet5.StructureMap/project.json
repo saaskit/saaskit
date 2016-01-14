@@ -1,0 +1,21 @@
+﻿{
+	"version": "1.0.0-rc1-final",
+	"title": "SaasKit Multitenancy AspNet5 for StructureMap",
+	"description": "SaasKit is a developers toolkit for building SaaS (Software As A Service) applications. Use this package to add multi-tenancy support.",
+	"authors": [ "Ben Foster" ],
+	"copyright": "Copyright © Ben Foster 2015",
+	"tags": [ "SaasKit", "Multitenancy", "Multi-tenant", "Saas", "StructureMap" ],
+	"projectUrl": "https://github.com/saaskit",
+	"licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
+
+	"dependencies": {
+		"Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+		"StructureMap.Dnx": "(0.4.0-alpha4,)",
+		"SaasKit.Multitenancy.AspNet5": "1.0.0-rc1-final"
+	},
+
+	"frameworks": {
+		"dnx451": { },
+		"net451": { }
+	}
+}

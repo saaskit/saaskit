@@ -1,0 +1,13 @@
+﻿@using SaasKit.Multitenancy.Samples.Mvc.AspNet5
+
+@model SaasKit.Multitenancy.AspNet5.TenantContext<AppTenant>
+@{
+	ViewBag.Title = "Home Page";
+}
+
+<h2>Tenant: @Model.Tenant.Name</h2>
+<p>
+	Created: @Model.Properties["Created"]
+</p>
+
+
