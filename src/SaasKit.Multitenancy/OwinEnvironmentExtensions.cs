@@ -11,8 +11,17 @@ namespace SaasKit.Multitenancy
         {
             Ensure.Argument.NotNull(environment, "environment");
             Ensure.Argument.NotNull(tenantContext, "tenantContext");
-
-            environment.Add(TenantContextKey, tenantContext);
+           try{
+              if(!environment.ContainsKey(TenantContextKey))
+              {
+               environment.Add(TenantContextKey, tenantContext);   
+              }
+              
+           }
+           catch (Exception){
+              //@todo entonctrar de saber si existe en el contexto
+           }
+            
         }
 
         public static TenantContext<TTenant> GetTenantContext<TTenant>(this IDictionary<string, object> environment)

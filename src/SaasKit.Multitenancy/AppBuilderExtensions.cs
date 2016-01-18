@@ -1,5 +1,7 @@
-﻿using SaasKit.Multitenancy;
+﻿using System.Threading.Tasks;
+using SaasKit.Multitenancy;
 using System;
+using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>; 
 
 namespace Owin
 {
@@ -41,5 +43,15 @@ namespace Owin
 
             return app;
         }
+
+        public static IAppBuilder IfTenantNotFound<TTenant>(this IAppBuilder app, Func<Task<TenantContext<TTenant>>> tenantFunc)
+        {
+           Ensure.Argument.NotNull(tenantFunc, "tenantFunc");
+           app.Use(typeof(TenantNotFoundMiddleware<TTenant>),tenantFunc);
+
+          return app;
+       }
+
+      
     }
 }
