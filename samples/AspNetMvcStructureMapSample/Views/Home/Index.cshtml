@@ -1,0 +1,15 @@
+﻿@using System.Threading.Tasks
+@using SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap.Models
+
+@model SaasKit.Multitenancy.Samples.Mvc.AspNet5.StructureMap.Models.HomeViewModel
+@{
+	ViewBag.Title = "Home Page";
+}
+
+<h2>Tenant: @Model.TenantContext.Tenant.Name</h2>
+<p>Message: @Model.Message</p>
+<p>
+	Created: @Model.TenantContext.Properties["Created"]
+</p>
+
+
