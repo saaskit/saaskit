@@ -7,12 +7,12 @@ namespace SaasKit.Multitenancy
     {
         public TenantContext(TTenant tenant)
         {
-            Ensure.Argument.NotNull(tenant, "tenant");
+            Ensure.Argument.NotNull(tenant, nameof(Tenant));
 
             Tenant = tenant;
             Properties = new Dictionary<string, object>();
         }
-        
+
         public TTenant Tenant { get; private set; }
         public IDictionary<string, object> Properties { get; private set; }
 
@@ -30,7 +30,7 @@ namespace SaasKit.Multitenancy
             {
                 return;
             }
-            
+
             try
             {
                 obj.Dispose();

@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-alpha",
+  "description": "Multitenancy support for ASP.NET 5.",
+  "authors": [ "Ben Foster" ],
+  "tags": [ "Multitenancy", "Multitenant", "Saas" ],
+  "copyright": "Copyright © Ben Foster",
+  "projectUrl": "https://github.com/saaskit/saaskit",
+  "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
+  "dependencies": {
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
+  },
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516"
+      }
+    }
+  }
+}
