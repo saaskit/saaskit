@@ -14,6 +14,7 @@ using AspNetMvcSample.Services;
 using Microsoft.Extensions.OptionsModel;
 using SaasKit.Multitenancy;
 using Microsoft.Extensions.Logging.Console;
+using Microsoft.AspNet.Mvc.Razor;
 
 namespace AspNetMvcSample
 {
@@ -53,8 +54,14 @@ namespace AspNetMvcSample
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddOptions();
+
             services.AddMvc();
-            services.AddOptions();            
+             
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new TenantViewLocationExpander());
+            });
 
             services.Configure<MultitenancyOptions>(Configuration.GetSection("Multitenancy"));
 
