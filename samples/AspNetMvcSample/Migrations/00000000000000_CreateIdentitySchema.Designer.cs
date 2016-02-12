@@ -10,7 +10,7 @@ using AspNetMvcSample.Models;
 
 namespace AspNetMvcSample.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(SqlServerApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
