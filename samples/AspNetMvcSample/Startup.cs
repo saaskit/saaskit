@@ -45,13 +45,20 @@ namespace AspNetMvcSample
             services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
 
             // Add framework services.
+            //services.AddEntityFramework()
+            //    .AddSqlServer()
+            //    .AddDbContext<SqlServerApplicationDbContext>();
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<SqlServerApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+
             services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+                .AddSqlite()
+                .AddDbContext<SqliteApplicationDbContext>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<SqliteApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddOptions();
@@ -93,7 +100,7 @@ namespace AspNetMvcSample
                     using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
                         .CreateScope())
                     {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        serviceScope.ServiceProvider.GetService<SqlServerApplicationDbContext>()
                              .Database.Migrate();
                     }
                 }
