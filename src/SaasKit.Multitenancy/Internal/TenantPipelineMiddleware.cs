@@ -43,9 +43,6 @@ namespace SaasKit.Multitenancy.Internal
 
                 await tenantPipeline.Value(context);
             }
-
-            // Connect back to the root app pipeline
-            await next(context);
         }
 
         private RequestDelegate BuildTenantPipeline(TenantContext<TTenant> tenantContext)
@@ -59,6 +56,10 @@ namespace SaasKit.Multitenancy.Internal
             };
 
             configuration(builderContext, branchBuilder);
+
+            // register root pipeline at the end of the tenant branch
+            branchBuilder.Run(next);
+
             return branchBuilder.Build();
         }
     }
