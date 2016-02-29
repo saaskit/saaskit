@@ -21,10 +21,7 @@ namespace AspNetMvcAuthSample
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
 
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets();
-            }
+            builder.AddUserSecrets();
 
             Configuration = builder.Build();
         }
@@ -61,27 +58,32 @@ namespace AspNetMvcAuthSample
 
             app.UseIISPlatformHandler();
 
-            app.UseCookieAuthentication(options =>
-            {
-                options.AuthenticationScheme = "Cookies";
-                options.LoginPath = new PathString("/account/login");
-                options.AccessDeniedPath = new PathString("/account/forbidden");
-                options.AutomaticAuthenticate = true;
-                options.AutomaticChallenge = true;
-            });
-
-            app.UseGoogleAuthentication(options =>
-            {
-                options.AuthenticationScheme = "Google";
-                options.SignInScheme = "Cookies";
-
-                options.ClientId = Configuration["Tenant1:GoogleClientId"];
-                options.ClientSecret = Configuration["Tenant1:GoogleClientSecret"];
-            });
-
             app.UseStaticFiles();
 
             app.UseMultitenancy<AppTenant>();
+
+            app.UsePerTenant<AppTenant>((ctx, builder) =>
+            {
+                builder.UseCookieAuthentication(options =>
+                {
+                    options.AuthenticationScheme = "Cookies";
+                    options.LoginPath = new PathString("/account/login");
+                    options.AccessDeniedPath = new PathString("/account/forbidden");
+                    options.AutomaticAuthenticate = true;
+                    options.AutomaticChallenge = true;
+
+                    options.CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies";
+                });
+
+                builder.UseGoogleAuthentication(options =>
+                {
+                    options.AuthenticationScheme = "Google";
+                    options.SignInScheme = "Cookies";
+
+                    options.ClientId = Configuration["Tenant1:GoogleClientId"];
+                    options.ClientSecret = Configuration["Tenant1:GoogleClientSecret"];
+                });
+            });
 
             app.UseMvc(routes =>
             {
