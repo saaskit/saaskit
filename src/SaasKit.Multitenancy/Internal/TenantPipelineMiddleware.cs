@@ -12,8 +12,8 @@ namespace SaasKit.Multitenancy.Internal
         private readonly IApplicationBuilder rootApp;
         private readonly Action<TenantPipelineBuilderContext<TTenant>, IApplicationBuilder> configuration;
 
-        private readonly ConcurrentDictionary<TTenant, RequestDelegate> pipelines
-            = new ConcurrentDictionary<TTenant, RequestDelegate>();
+        private readonly ConcurrentDictionary<TTenant, Lazy<RequestDelegate>> pipelines
+            = new ConcurrentDictionary<TTenant, Lazy<RequestDelegate>>();
 
         public TenantPipelineMiddleware(
             RequestDelegate next, 
@@ -37,26 +37,29 @@ namespace SaasKit.Multitenancy.Internal
 
             if (tenantContext != null)
             {
-                var tenantPipeline = pipelines.GetOrAdd(tenantContext.Tenant, tenant =>
-                {
-                    var branchBuilder = rootApp.New();
+                var tenantPipeline = pipelines.GetOrAdd(
+                    tenantContext.Tenant, 
+                    new Lazy<RequestDelegate>(() => BuildTenantPipeline(tenantContext)));
 
-                    var builderContext = new TenantPipelineBuilderContext<TTenant>
-                    {
-                        RequestServices = context.RequestServices,
-                        TenantContext = tenantContext,
-                        Tenant = tenantContext.Tenant
-                    };
-
-                    configuration(builderContext, branchBuilder);
-                    return branchBuilder.Build();
-                });
-
-                await tenantPipeline(context);
+                await tenantPipeline.Value(context);
             }
 
             // Connect back to the root app pipeline
             await next(context);
+        }
+
+        private RequestDelegate BuildTenantPipeline(TenantContext<TTenant> tenantContext)
+        {
+            var branchBuilder = rootApp.New();
+
+            var builderContext = new TenantPipelineBuilderContext<TTenant>
+            {
+                TenantContext = tenantContext,
+                Tenant = tenantContext.Tenant
+            };
+
+            configuration(builderContext, branchBuilder);
+            return branchBuilder.Build();
         }
     }
 }
