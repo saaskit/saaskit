@@ -80,8 +80,8 @@ namespace AspNetMvcAuthSample
                     options.AuthenticationScheme = "Google";
                     options.SignInScheme = "Cookies";
 
-                    options.ClientId = Configuration["Tenant1:GoogleClientId"];
-                    options.ClientSecret = Configuration["Tenant1:GoogleClientSecret"];
+                    options.ClientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"];
+                    options.ClientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"];
                 });
             });
 
