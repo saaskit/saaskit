@@ -43,7 +43,7 @@ namespace SaasKit.Multitenancy.Internal
 
                     var builderContext = new TenantPipelineBuilderContext<TTenant>
                     {
-                        HttpContext = context,
+                        RequestServices = context.RequestServices,
                         TenantContext = tenantContext,
                         Tenant = tenantContext.Tenant
                     };
