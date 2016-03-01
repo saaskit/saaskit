@@ -213,3 +213,6 @@ ModelManifest.xml
 
 .DS_store
 ._.DS_Store
+
+# Visual Studio Bower Packages
+**/wwwroot/lib/

@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0-alpha",
-  "description": "Multitenancy support for ASP.NET 5.",
+  "version": "1.1.0-alpha",
+  "description": "Multi-tenancy support for ASP.NET Core.",
   "authors": [ "Ben Foster" ],
-  "tags": [ "Multitenancy", "Multitenant", "Saas" ],
+  "tags": [ "Multi-tenancy", "Multi-tenant", "Saas" ],
   "copyright": "Copyright © Ben Foster",
   "projectUrl": "https://github.com/saaskit/saaskit",
   "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
