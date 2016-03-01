@@ -14,7 +14,9 @@
     "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-build204",
     "Microsoft.AspNet.Http": "1.0.0-rc1-final",
-    "SaasKit.Multitenancy": { "target": "project" }
+    "Microsoft.AspNet.TestHost": "1.0.0-rc1-final",
+    "SaasKit.Multitenancy": { "target": "project" },
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final"
   },
 
   "frameworks": {
