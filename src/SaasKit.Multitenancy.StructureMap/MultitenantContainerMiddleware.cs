@@ -10,9 +10,9 @@ namespace SaasKit.Multitenancy.StructureMap
     {
         RequestDelegate next;
         IContainer appContainer;
-        Action<ConfigurationExpression> tenantConfiguration;
+        Action<TTenant, ConfigurationExpression> tenantConfiguration;
 
-        public MultitenantContainerMiddleware(RequestDelegate next, IContainer appContainer, Action<ConfigurationExpression> tenantConfiguration)
+        public MultitenantContainerMiddleware(RequestDelegate next, IContainer appContainer, Action<TTenant, ConfigurationExpression> tenantConfiguration)
         {
             this.next = next;
             this.appContainer = appContainer;
@@ -43,7 +43,7 @@ namespace SaasKit.Multitenancy.StructureMap
             if (tenantContainer == null)
             {
                 tenantContainer = appContainer.CreateChildContainer();
-                tenantContainer.Configure(tenantConfiguration);
+                tenantContainer.Configure(config => tenantConfiguration(tenantContext.Tenant, config));
                 tenantContext.SetTenantContainer(tenantContainer);
             }
 

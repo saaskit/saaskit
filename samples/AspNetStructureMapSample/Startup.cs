@@ -39,9 +39,9 @@ namespace AspNetStructureMapSample
 
             app.UseMultitenancy<AppTenant>();
 
-            app.UseTenantContainer<AppTenant>(c =>
+            app.UseTenantContainer<AppTenant>((tenant, config) =>
             {
-                c.For<IMessageService>().Singleton().Use<MessageService>();
+                config.For<IMessageService>().Singleton().Use<MessageService>();
             });
 
             app.UseMiddleware<LogTenantMiddleware>();
