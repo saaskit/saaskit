@@ -12,8 +12,8 @@
     "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final",
     "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
     "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-    "StructureMap.Dnx": "0.4.0-alpha4",
-    "SaasKit.Multitenancy": { "target": "project" }
+    "StructureMap.Dnx": "0.5.1-rc1-final",
+    "SaasKit.Multitenancy": ""
   },
   "frameworks": {
     "net451": { },

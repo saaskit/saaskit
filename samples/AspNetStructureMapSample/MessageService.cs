@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 
 namespace AspNetStructureMapSample
 {
@@ -8,14 +9,21 @@ namespace AspNetStructureMapSample
         string Format(string message);
     }
 
-    public class MessageService : IMessageService
+    public class MessageService : IMessageService, IDisposable
     {
-        public MessageService()
+        ILogger<MessageService> log;
+
+        public MessageService(ILogger<MessageService> log)
         {
-            Id = Guid.NewGuid();
+            this.log = log;
         }
 
-        public Guid Id { get; }
+        public Guid Id { get; } = Guid.NewGuid();
+
+        public void Dispose()
+        {
+            log.LogInformation("Disposing MessageSerivce:{id}", Id);
+        }
 
         public string Format(string message)
         {

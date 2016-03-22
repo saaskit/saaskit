@@ -7,7 +7,7 @@ namespace SaasKit.Multitenancy
     /// <summary>
     /// Helper class that will throw exceptions when conditions are not satisfied.
     /// </summary>
-    internal static class Ensure
+    public static class Ensure
     {
         /// <summary>
         /// Ensures that the given expression is true

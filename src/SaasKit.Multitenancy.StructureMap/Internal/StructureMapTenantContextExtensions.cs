@@ -1,6 +1,6 @@
 ﻿using StructureMap;
 
-namespace SaasKit.Multitenancy
+namespace SaasKit.Multitenancy.StructureMap.Internal
 {
     internal static class StructureMapTenantContextExtensions
     {
@@ -8,6 +8,8 @@ namespace SaasKit.Multitenancy
 
         public static IContainer GetTenantContainer<TTenant>(this TenantContext<TTenant> tenantContext)
         {
+            Ensure.Argument.NotNull(tenantContext, nameof(tenantContext));
+
             object tenantContainer;
             if (tenantContext.Properties.TryGetValue(TenantContainerKey, out tenantContainer))
             {
@@ -19,6 +21,9 @@ namespace SaasKit.Multitenancy
 
         public static void SetTenantContainer<TTenant>(this TenantContext<TTenant> tenantContext, IContainer tenantContainer)
         {
+            Ensure.Argument.NotNull(tenantContext, nameof(tenantContext));
+            Ensure.Argument.NotNull(tenantContainer, nameof(tenantContainer));
+
             tenantContext.Properties[TenantContainerKey] = tenantContainer;
         }
     }

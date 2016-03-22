@@ -12,7 +12,7 @@ namespace AspNetStructureMapSample
     {
         private readonly Dictionary<string, string> mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
-            { "localhost:53256", "Tenant 1"},
+            { "localhost:60000", "Tenant 1"},
             { "localhost:60001", "Tenant 2"},
             { "localhost:60002", "Tenant 3"},
         };
@@ -45,6 +45,11 @@ namespace AspNetStructureMapSample
             }
 
             return Task.FromResult(tenantContext);
+        }
+
+        protected override MemoryCacheEntryOptions CreateCacheEntryOptions()
+        {
+            return base.CreateCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
         }
     }
 }
