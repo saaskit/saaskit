@@ -13,7 +13,7 @@ namespace StructureMap
 
             container.Configure(_ =>
                 _.For<ITenantContainerBuilder<TTenant>>()
-                    .Use(new DefaultTenantContainerBuilder<TTenant>(container, (tenant, config) => configure(config)))
+                    .Use(new StructureMapTenantContainerBuilder<TTenant>(container, (tenant, config) => configure(config)))
             );
         }
 
@@ -24,7 +24,7 @@ namespace StructureMap
 
             container.Configure(_ =>
                 _.For<ITenantContainerBuilder<TTenant>>()
-                    .Use(new DefaultTenantContainerBuilder<TTenant>(container, configure))
+                    .Use(new StructureMapTenantContainerBuilder<TTenant>(container, configure))
             );
         }
     }

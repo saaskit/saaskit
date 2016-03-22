@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.StructureMap
 {
-    public class DefaultTenantContainerBuilder<TTenant> : ITenantContainerBuilder<TTenant>
+    public class StructureMapTenantContainerBuilder<TTenant> : ITenantContainerBuilder<TTenant>
     {
-        public DefaultTenantContainerBuilder(IContainer container, Action<TTenant, ConfigurationExpression> configure)
+        public StructureMapTenantContainerBuilder(IContainer container, Action<TTenant, ConfigurationExpression> configure)
         {
             Ensure.Argument.NotNull(container, nameof(container));
             Ensure.Argument.NotNull(configure, nameof(configure));
