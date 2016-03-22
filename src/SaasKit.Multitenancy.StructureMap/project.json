@@ -1,8 +1,8 @@
 ﻿{
-  "version": "1.0.0-alpha",
-  "description": "Multitenant dependency injection for ASP.NET 5 using StructureMap.",
+  "version": "1.1.0-alpha",
+  "description": "Multi-tenancy support for ASP.NET Core using StructureMap.",
   "authors": [ "Ben Foster" ],
-  "tags": [ "Multitenancy", "Multitenant", "Saas" ],
+  "tags": [ "Multi-tenancy", "Multi-tenant", "Saas", "StructureMap" ],
   "copyright": "Copyright © Ben Foster",
   "projectUrl": "https://github.com/saaskit/saaskit",
   "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
