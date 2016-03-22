@@ -30,4 +30,14 @@ namespace AspNetStructureMapSample
             return $"{Id}: {message}";
         }
     }
+
+    public class OtherMessageService : IMessageService
+    {
+        public Guid Id { get; } = Guid.NewGuid();
+
+        public string Format(string message)
+        {
+            return "Other";
+        }
+    }
 }

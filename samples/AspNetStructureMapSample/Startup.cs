@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using StructureMap;
 using System;
 using System.Threading.Tasks;
+using SaasKit.Multitenancy.StructureMap;
 
 namespace AspNetStructureMapSample
 {
@@ -17,13 +18,20 @@ namespace AspNetStructureMapSample
         {
             services.AddMultitenancy<AppTenant, AppTenantResolver>();
 
-            var container = new Container(); 
+            var container = new Container();
 
             container.Populate(services);
 
-            container.Configure(c => 
+            container.Configure(c =>
             {
-                // Application scoped services
+                // Application Services
+                // c.For<ITenantContainerBuilder<AppTenant>>().Use(() => new AppTenantContainerBuilder(container));
+            });
+
+            container.ConfigureTenants<AppTenant>(c =>
+            {
+                // Tenant Scoped Services
+                c.For<IMessageService>().Singleton().Use<MessageService>();
             });
 
             return container.GetInstance<IServiceProvider>();
@@ -38,11 +46,7 @@ namespace AspNetStructureMapSample
             app.UseIISPlatformHandler();
 
             app.UseMultitenancy<AppTenant>();
-
-            app.UseTenantContainer<AppTenant>((tenant, config) =>
-            {
-                config.For<IMessageService>().Singleton().Use<MessageService>();
-            });
+            app.UseTenantContainers<AppTenant>();
 
             app.UseMiddleware<LogTenantMiddleware>();
         }
@@ -65,8 +69,6 @@ namespace AspNetStructureMapSample
         public async Task Invoke(HttpContext context, IMessageService messageService)
         {
             var tenant = context.GetTenant<AppTenant>();
-
-            messageService = context.RequestServices.GetService<IMessageService>();
 
             if (tenant != null)
             {

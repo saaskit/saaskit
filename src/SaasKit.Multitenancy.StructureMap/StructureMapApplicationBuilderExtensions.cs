@@ -7,7 +7,7 @@ namespace Microsoft.AspNet.Builder
 {
     public static class StructureMapApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseTenantContainer<TTenant>(
+        public static IApplicationBuilder UseTenantContainers<TTenant>(
             this IApplicationBuilder app, 
             Action<TTenant, ConfigurationExpression> tenantContainerBuilder)
         {
@@ -15,6 +15,14 @@ namespace Microsoft.AspNet.Builder
             Ensure.Argument.NotNull(tenantContainerBuilder, nameof(tenantContainerBuilder));
 
             return app.UseMiddleware<MultitenantContainerMiddleware<TTenant>>(tenantContainerBuilder);
+        }
+
+        public static IApplicationBuilder UseTenantContainers<TTenant>(
+            this IApplicationBuilder app)
+        {
+            Ensure.Argument.NotNull(app, nameof(app));
+
+            return app.UseMiddleware<MultitenantContainerMiddleware<TTenant>>();
         }
     }
 }
