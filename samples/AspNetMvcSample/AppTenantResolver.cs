@@ -44,5 +44,11 @@ namespace AspNetMvcSample
 
             return Task.FromResult(tenantContext);
         }
+
+        protected override MemoryCacheEntryOptions CreateCacheEntryOptions()
+        {
+            return base.CreateCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+        }
     }
 }

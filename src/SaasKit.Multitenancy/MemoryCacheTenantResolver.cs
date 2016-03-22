@@ -24,7 +24,7 @@ namespace SaasKit.Multitenancy
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
             return new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(new TimeSpan(1, 0, 0))
+                .SetSlidingExpiration(new TimeSpan(1, 0, 0))
                 .RegisterPostEvictionCallback((key, value, reason, state) 
                     => DisposeTenantContext(key, value as TenantContext<TTenant>));
         }
