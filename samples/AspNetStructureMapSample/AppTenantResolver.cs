@@ -49,7 +49,8 @@ namespace AspNetStructureMapSample
 
         protected override MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
-            return base.CreateCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
+            return base.CreateCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(5));
         }
     }
 }
