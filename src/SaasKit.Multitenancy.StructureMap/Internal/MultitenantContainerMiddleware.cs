@@ -9,17 +9,11 @@ namespace SaasKit.Multitenancy.StructureMap.Internal
     internal class MultitenantContainerMiddleware<TTenant>
     {
         private readonly RequestDelegate next;
-        private readonly IContainer appContainer;
 
-        public MultitenantContainerMiddleware(
-            RequestDelegate next,
-            IContainer appContainer)
+        public MultitenantContainerMiddleware(RequestDelegate next)
         {
             Ensure.Argument.NotNull(next, nameof(next));
-            Ensure.Argument.NotNull(appContainer, nameof(appContainer));
-
             this.next = next;
-            this.appContainer = appContainer;
         }
 
         public async Task Invoke(HttpContext context, Lazy<ITenantContainerBuilder<TTenant>> builder)
