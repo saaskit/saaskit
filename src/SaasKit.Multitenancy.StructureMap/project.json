@@ -1,10 +1,10 @@
 ﻿{
-  "version": "1.1.0-alpha",
+  "version": "1.1.1-alpha",
   "description": "Multi-tenancy support for ASP.NET Core using StructureMap.",
   "authors": [ "Ben Foster" ],
   "tags": [ "Multi-tenancy", "Multi-tenant", "Saas", "StructureMap" ],
   "copyright": "Copyright © Ben Foster",
-  "projectUrl": "https://github.com/saaskit/saaskit",
+  "projectUrl": "http://saaskit.net",
   "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
   "dependencies": {
     "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
