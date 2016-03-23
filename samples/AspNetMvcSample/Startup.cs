@@ -82,7 +82,7 @@ namespace AspNetMvcSample
         {
             loggerFactory.MinimumLevel = LogLevel.Debug;
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));           
-            loggerFactory.AddDebug();
+            loggerFactory.AddDebug(LogLevel.Debug);
 
             if (env.IsDevelopment())
             {

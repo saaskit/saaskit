@@ -1,23 +1,26 @@
 ﻿using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.OptionsModel;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace AspNetMvcSample
+namespace AspNetStructureMapSample
 {
-    public class CachingAppTenantResolver : MemoryCacheTenantResolver<AppTenant>
+    public class AppTenantResolver : MemoryCacheTenantResolver<AppTenant>
     {
-        private readonly IEnumerable<AppTenant> tenants;
+        private readonly Dictionary<string, string> mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "localhost:60000", "Tenant 1"},
+            { "localhost:60001", "Tenant 2"},
+            { "localhost:60002", "Tenant 3"},
+        };
 
-        public CachingAppTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory, IOptions<MultitenancyOptions> options)
+        public AppTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory) 
             : base(cache, loggerFactory)
         {
-            this.tenants = options.Value.Tenants;
+
         }
 
         protected override string GetContextIdentifier(HttpContext context)
@@ -32,14 +35,13 @@ namespace AspNetMvcSample
 
         protected override Task<TenantContext<AppTenant>> ResolveAsync(HttpContext context)
         {
+            string tenantName = null;
             TenantContext<AppTenant> tenantContext = null;
 
-            var tenant = tenants.FirstOrDefault(t => 
-                t.Hostnames.Any(h => h.Equals(context.Request.Host.Value.ToLower())));
-
-            if (tenant != null)
+            if (mappings.TryGetValue(context.Request.Host.Value, out tenantName))
             {
-                tenantContext = new TenantContext<AppTenant>(tenant);
+                tenantContext = new TenantContext<AppTenant>(
+                    new AppTenant { Name = tenantName, Hostnames = new[] { context.Request.Host.Value } });
             }
 
             return Task.FromResult(tenantContext);

@@ -24,7 +24,18 @@ namespace SaasKit.Multitenancy
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
             return new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(new TimeSpan(1, 0, 0)); // Default 1 hour lifetime
+                .SetSlidingExpiration(new TimeSpan(1, 0, 0))
+                .RegisterPostEvictionCallback((key, value, reason, state) 
+                    => DisposeTenantContext(key, value as TenantContext<TTenant>));
+        }
+
+        protected virtual void DisposeTenantContext(object cacheKey, TenantContext<TTenant> tenantContext)
+        {
+            if (tenantContext != null)
+            {
+                log.LogDebug("Disposing TenantContext:{id} instance with key \"{cacheKey}\".", tenantContext.Id, cacheKey);
+                tenantContext.Dispose();
+            }
         }
 
         protected abstract string GetContextIdentifier(HttpContext context);
@@ -50,7 +61,7 @@ namespace SaasKit.Multitenancy
                     var tenantIdentifiers = GetTenantIdentifiers(tenantContext);
                     var cacheEntryOptions = CreateCacheEntryOptions();
 
-                    log.LogDebug("TenantContext resolved. Caching with keys \"{tenantIdentifiers}\".", tenantIdentifiers);
+                    log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
 
                     foreach (var identifier in tenantIdentifiers)
                     {
@@ -60,7 +71,7 @@ namespace SaasKit.Multitenancy
             }
             else
             {
-                log.LogDebug("TenantContext retrieved from cache with key \"{cacheKey}\".", cacheKey);
+                log.LogDebug("TenantContext:{id} retrieved from cache with key \"{cacheKey}\".", tenantContext.Id, cacheKey);
             }
 
             return tenantContext;

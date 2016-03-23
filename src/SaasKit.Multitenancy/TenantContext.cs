@@ -5,6 +5,8 @@ namespace SaasKit.Multitenancy
 {
     public class TenantContext<TTenant> : IDisposable
     {
+        private bool disposed;
+
         public TenantContext(TTenant tenant)
         {
             Ensure.Argument.NotNull(tenant, nameof(Tenant));
@@ -13,18 +15,35 @@ namespace SaasKit.Multitenancy
             Properties = new Dictionary<string, object>();
         }
 
-        public TTenant Tenant { get; private set; }
-        public IDictionary<string, object> Properties { get; private set; }
+        public string Id { get; } = Guid.NewGuid().ToString();
+        public TTenant Tenant { get; }
+        public IDictionary<string, object> Properties { get; }
 
         public void Dispose()
         {
-            foreach (var prop in Properties)
-            {
-                TryDispose(prop.Value as IDisposable);
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        private void TryDispose(IDisposable obj)
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                foreach (var prop in Properties)
+                {
+                    TryDisposeProperty(prop.Value as IDisposable);
+                }
+            }
+
+            disposed = true;
+        }
+
+        private void TryDisposeProperty(IDisposable obj)
         {
             if (obj == null)
             {
