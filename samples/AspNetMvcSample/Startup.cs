@@ -15,6 +15,7 @@ using Microsoft.Extensions.OptionsModel;
 using SaasKit.Multitenancy;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.AspNet.Mvc.Razor;
+using SaasKit.Multitenancy.Internal;
 
 namespace AspNetMvcSample
 {
@@ -112,6 +113,7 @@ namespace AspNetMvcSample
             app.UseStaticFiles();
 
             app.UseMultitenancy<AppTenant>();
+            app.UseMiddleware<TenantUnresolvedRedirectMiddleware<AppTenant>>("http://saaskit.net", false);
 
             app.UseIdentity();
 
