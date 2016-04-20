@@ -24,7 +24,27 @@ namespace AspNetSample
             loggerFactory.AddConsole(LogLevel.Debug);
 
             app.UseIISPlatformHandler();
+
+            app.Map(
+                new PathString("/onboarding"),
+                branch => branch.Run(async ctx =>
+                {
+                    await ctx.Response.WriteAsync("Onboarding");
+                })
+            );
+
             app.UseMultitenancy<AppTenant>();
+
+            app.Use(async (ctx, next) =>
+            {
+                if (ctx.GetTenant<AppTenant>().Name == "Default")
+                {
+                    ctx.Response.Redirect("/onboarding");
+                } else
+                {
+                    await next();
+                }
+            });
 
             app.UseMiddleware<LogTenantMiddleware>();
         }
