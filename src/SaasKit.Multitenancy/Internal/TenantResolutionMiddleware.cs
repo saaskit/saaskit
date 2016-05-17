@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -32,7 +32,7 @@ namespace SaasKit.Multitenancy.Internal
 
             if (tenantContext != null)
             {
-                log.LogVerbose("TenantContext Resolved. Adding to HttpContext.");
+                log.LogTrace( "TenantContext Resolved. Adding to HttpContext." );
                 context.SetTenantContext(tenantContext);
             }
             else

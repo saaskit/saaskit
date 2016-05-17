@@ -2,7 +2,7 @@
 using SaasKit.Multitenancy.Internal;
 using System;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
     public static class UsePerTenantApplicationBuilderExtensions
     {
