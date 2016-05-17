@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using SaasKit.Multitenancy;
 using SaasKit.Multitenancy.Internal;
+
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -22,7 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
 
             // Ensure caching is available for caching resolvers
-            services.AddCaching();
+            services.AddMemoryCache();
 
             return services;
         }
