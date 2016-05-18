@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetMvcSample.Models
 {
-    public class SqlServerApplicationDbContext : IdentityDbContext<ApplicationUser>
+	using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+	using Microsoft.EntityFrameworkCore;
+
+	public class SqlServerApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private readonly AppTenant tenant;
 

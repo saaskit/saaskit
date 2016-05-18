@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authentication.Google;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -18,7 +18,8 @@ namespace AspNetMvcAuthSample
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
 
             builder.AddUserSecrets();
@@ -55,33 +56,30 @@ namespace AspNetMvcAuthSample
             }
 
             app.UseDeveloperExceptionPage();
-
-            app.UseIISPlatformHandler();
-
+			
             app.UseStaticFiles();
 
             app.UseMultitenancy<AppTenant>();
 
             app.UsePerTenant<AppTenant>((ctx, builder) =>
             {
-                builder.UseCookieAuthentication(options =>
+                builder.UseCookieAuthentication(new CookieAuthenticationOptions()
+				{
+					AuthenticationScheme = "Cookies",
+					LoginPath = new PathString("/account/login"),
+					AccessDeniedPath = new PathString("/account/forbidden"),
+					AutomaticAuthenticate = true,
+					AutomaticChallenge = true,
+					CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies"
+				});
+
+                builder.UseGoogleAuthentication(new GoogleOptions()
                 {
-                    options.AuthenticationScheme = "Cookies";
-                    options.LoginPath = new PathString("/account/login");
-                    options.AccessDeniedPath = new PathString("/account/forbidden");
-                    options.AutomaticAuthenticate = true;
-                    options.AutomaticChallenge = true;
+                    AuthenticationScheme = "Google",
+                    SignInScheme = "Cookies",
 
-                    options.CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies";
-                });
-
-                builder.UseGoogleAuthentication(options =>
-                {
-                    options.AuthenticationScheme = "Google";
-                    options.SignInScheme = "Cookies";
-
-                    options.ClientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"];
-                    options.ClientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"];
+                    ClientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"],
+                    ClientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"]
                 });
             });
 
@@ -92,8 +90,5 @@ namespace AspNetMvcAuthSample
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
     }
 }

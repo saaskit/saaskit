@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
