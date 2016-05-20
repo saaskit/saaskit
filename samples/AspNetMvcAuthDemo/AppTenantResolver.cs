@@ -28,7 +28,7 @@ namespace AspNetMvcAuthSample
 
         protected override IEnumerable<string> GetTenantIdentifiers(TenantContext<AppTenant> context)
         {
-            return context.Tenant.Hostnames;
+            return context?.Tenant?.Hostnames;
         }
 
         protected override Task<TenantContext<AppTenant>> ResolveAsync(HttpContext context)

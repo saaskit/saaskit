@@ -4,6 +4,7 @@ using SaasKit.Multitenancy.Internal;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+	using Extensions;
 	using System.Reflection;
 
 	public static class MultitenancyServiceCollectionExtensions
@@ -16,8 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<ITenantResolver<TTenant>, TResolver>();
 
-            // Make Tenant and TenantContext injectable
-            services.AddScoped(prov => 
+			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+			// Make Tenant and TenantContext injectable
+			services.AddScoped(prov => 
                 prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenant<TTenant>());
 
             services.AddScoped(prov =>

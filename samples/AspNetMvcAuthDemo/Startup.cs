@@ -61,9 +61,9 @@ namespace AspNetMvcAuthSample
 
             app.UseMultitenancy<AppTenant>();
 
-            app.UsePerTenant<AppTenant>((ctx, builder) =>
-            {
-                builder.UseCookieAuthentication(new CookieAuthenticationOptions()
+			app.UsePerTenant<AppTenant>((ctx, builder) =>
+			{
+				builder.UseCookieAuthentication(new CookieAuthenticationOptions()
 				{
 					AuthenticationScheme = "Cookies",
 					LoginPath = new PathString("/account/login"),
@@ -73,17 +73,25 @@ namespace AspNetMvcAuthSample
 					CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies"
 				});
 
-                builder.UseGoogleAuthentication(new GoogleOptions()
-                {
-                    AuthenticationScheme = "Google",
-                    SignInScheme = "Cookies",
 
-                    ClientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"],
-                    ClientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"]
-                });
-            });
+				// only register for google if ClientId and ClientSecret both exist
+				var clientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"];
+				var clientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"];
 
-            app.UseMvc(routes =>
+				if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
+				{
+					builder.UseGoogleAuthentication(new GoogleOptions()
+					{
+						AuthenticationScheme = "Google",
+						SignInScheme = "Cookies",
+
+						ClientId = clientId,
+						ClientSecret = clientSecret
+					});
+				}
+			});
+
+			app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
