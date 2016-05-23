@@ -17,10 +17,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<ITenantResolver<TTenant>, TResolver>();
 
-			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+	    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-			// Make Tenant and TenantContext injectable
-			services.AddScoped(prov => 
+	    // Make Tenant and TenantContext injectable
+	    services.AddScoped(prov => 
                 prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenant<TTenant>());
 
             services.AddScoped(prov =>
