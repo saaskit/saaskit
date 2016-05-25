@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.1.2-rc2-alpha",
+  "version": "1.1.2-rc2",
   "description": "Multi-tenancy support for ASP.NET Core using StructureMap.",
   "authors": [ "Ben Foster" ],
 	"packOptions": {
