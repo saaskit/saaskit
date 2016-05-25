@@ -1,33 +1,54 @@
 {
-  "version": "1.0.0-*",
-  "compilationOptions": {
-    "emitEntryPoint": true
-  },
+	"version": "1.0.0-*",
+	"dependencies": {
+		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
+		"Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
+		"Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+		"Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+		"SaasKit.Multitenancy": { "target": "project" },
+		"SaasKit.Multitenancy.StructureMap": { "target": "project" }
+	},
+	"frameworks": {
+		"net46": { },
+		"netcoreapp1.0": {
+			"imports": [
+				"dotnet5.6",
+				"dnxcore50",
+				"portable-net45+win8"
+			],
+			"dependencies": {
+				"Microsoft.NETCore.App": {
+					"version": "1.0.0-rc2-*",
+					"type": "platform"
+				}
+			}
+		}
+	},
+	"tools": {
+		"Microsoft.AspNetCore.Server.IISIntegration.Tools": {
+			"version": "1.0.0-preview1-final",
+			"imports": "portable-net45+win8+dnxcore50"
+		}
+	},
+	"buildOptions": {
+		"emitEntryPoint": true,
+		"preserveCompilationContext": true
+	},
 
-  "dependencies": {
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
-    "SaasKit.Multitenancy": { "target": "project" },
-    "SaasKit.Multitenancy.StructureMap": { "target": "project" }
-  },
+	"runtimeOptions": {
+		"gcServer": true
+	},
 
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:60000;http://localhost:60001;http://localhost:60002"
-  },
-
-  "frameworks": {
-    "dnx451": { },
-    "dnxcore50": { }
-  },
-
-  "exclude": [
-    "wwwroot",
-    "node_modules"
-  ],
-  "publishExclude": [
-    "**.user",
-    "**.vspscc"
-  ]
+	"publishOptions": {
+		"include": [
+			"wwwroot",
+			"Views",
+			"appsettings.json",
+			"web.config"
+		]
+	},
+	"scripts": {
+		"postpublish": "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
+		"prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
+	}
 }
