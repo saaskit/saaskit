@@ -1,5 +1,5 @@
-using Microsoft.AspNet.Http.Authentication;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 

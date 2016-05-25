@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using SaasKit.Multitenancy;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace AspNetMvcAuthSample
 {
-    public class CachingAppTenantResolver : MemoryCacheTenantResolver<AppTenant>
+
+	public class CachingAppTenantResolver : MemoryCacheTenantResolver<AppTenant>
     {
         private readonly IEnumerable<AppTenant> tenants;
 
@@ -27,7 +28,7 @@ namespace AspNetMvcAuthSample
 
         protected override IEnumerable<string> GetTenantIdentifiers(TenantContext<AppTenant> context)
         {
-            return context.Tenant.Hostnames;
+            return context?.Tenant?.Hostnames;
         }
 
         protected override Task<TenantContext<AppTenant>> ResolveAsync(HttpContext context)

@@ -7,7 +7,11 @@ SaasKit is a .NET toolkit for building SaaS (Software As A Service) applications
 
 The goal of the project is to help developers build SaaS products without getting in the way. It aims to be platform agnostic and as simple to use as possible.
 
-[Getting Started](https://github.com/saaskit/saaskit/wiki/SaasKit-Multitenancy)
+#### Getting Started
+
+[ASP.NET MVC 5 / Web API 2](https://github.com/saaskit/saaskit/wiki/SaasKit-Multitenancy)  
+[ASP.NET Core](http://benfoster.io/blog/tagged/saaskit)
+
 
 #### Contribute
 
