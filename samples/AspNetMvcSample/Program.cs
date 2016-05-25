@@ -1,12 +1,9 @@
-﻿namespace AspNetMvcSample
+﻿using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
+namespace AspNetMvcSample
 {
-	using System.IO;
-
-	using Microsoft.AspNetCore.Hosting;
-	using Microsoft.AspNetCore.Server.Kestrel;
-	using Microsoft.Extensions.Options;
-
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{

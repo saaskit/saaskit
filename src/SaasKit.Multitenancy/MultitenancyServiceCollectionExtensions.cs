@@ -1,15 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using SaasKit.Multitenancy;
-using SaasKit.Multitenancy.Internal;
+using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-	using Extensions;
-	using System.Reflection;
-
-	public static class MultitenancyServiceCollectionExtensions
+    public static class MultitenancyServiceCollectionExtensions
     {
-        public static IServiceCollection AddMultitenancy<TTenant, TResolver>(this IServiceCollection services) 
+        public static IServiceCollection AddMultitenancy<TTenant, TResolver>(this IServiceCollection services)
             where TResolver : class, ITenantResolver<TTenant>
             where TTenant : class
         {
@@ -17,21 +15,22 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddScoped<ITenantResolver<TTenant>, TResolver>();
 
-	    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // No longer registered by default as of ASP.NET Core RC2
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-	    // Make Tenant and TenantContext injectable
-	    services.AddScoped(prov => 
-                prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenant<TTenant>());
+            // Make Tenant and TenantContext injectable
+            services.AddScoped(prov =>
+                    prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenant<TTenant>());
 
             services.AddScoped(prov =>
                 prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
 
             // Ensure caching is available for caching resolvers
-	        var resolverType = typeof(TResolver);
-	        if (typeof(MemoryCacheTenantResolver<TTenant>).IsAssignableFrom(resolverType))
-			{
-				services.AddMemoryCache();
-			}
+            var resolverType = typeof(TResolver);
+            if (typeof(MemoryCacheTenantResolver<TTenant>).IsAssignableFrom(resolverType))
+            {
+                services.AddMemoryCache();
+            }
 
             return services;
         }

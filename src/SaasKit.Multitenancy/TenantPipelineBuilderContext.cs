@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-
-namespace SaasKit.Multitenancy
+﻿namespace SaasKit.Multitenancy
 {
     public class TenantPipelineBuilderContext<TTenant>
     {

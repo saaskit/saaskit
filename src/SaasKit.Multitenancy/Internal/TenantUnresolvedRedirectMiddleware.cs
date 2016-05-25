@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace SaasKit.Multitenancy.Internal

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 using StructureMap;
 using System;
 using System.Threading.Tasks;
-using SaasKit.Multitenancy.StructureMap;
 
 namespace AspNetStructureMapSample
 {

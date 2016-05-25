@@ -1,14 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using System;
+using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.Internal
 {
-	using Microsoft.AspNetCore.Http;
-
-	public class PrimaryHostnameRedirectMiddleware<TTenant>
+    public class PrimaryHostnameRedirectMiddleware<TTenant>
     {
         private readonly Func<TTenant, string> primaryHostnameAccessor;
         private readonly bool permanentRedirect;

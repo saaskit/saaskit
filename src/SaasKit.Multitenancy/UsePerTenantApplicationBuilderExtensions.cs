@@ -4,8 +4,6 @@ using System;
 
 namespace Microsoft.AspNetCore.Builder
 {
-	using Microsoft.AspNetCore.Builder;
-
 	public static class UsePerTenantApplicationBuilderExtensions
     {
         public static IApplicationBuilder UsePerTenant<TTenant>(this IApplicationBuilder app, Action<TenantPipelineBuilderContext<TTenant>, IApplicationBuilder> configuration)

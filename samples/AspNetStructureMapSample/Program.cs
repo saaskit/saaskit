@@ -1,10 +1,9 @@
-﻿namespace AspNetStructureMapSample
+﻿using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
+namespace AspNetStructureMapSample
 {
-	using System.IO;
-
-	using Microsoft.AspNetCore.Hosting;
-
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{

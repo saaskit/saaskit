@@ -1,10 +1,7 @@
 ﻿using SaasKit.Multitenancy;
 
-// ReSharper disable once CheckNamespace
 namespace Microsoft.AspNetCore.Http
 {
-	using Microsoft.AspNetCore.Http;
-
 	/// <summary>
     /// Multitenant extensions for <see cref="HttpContext"/>.
     /// </summary>

@@ -3,9 +3,7 @@ using SaasKit.Multitenancy.Internal;
 
 namespace Microsoft.AspNetCore.Builder
 {
-	using Microsoft.AspNetCore.Builder;
-
-	public static class MultitenancyApplicationBuilderExtensions
+    public static class MultitenancyApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseMultitenancy<TTenant>(this IApplicationBuilder app)
         {

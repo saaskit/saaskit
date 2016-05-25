@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace AspNetMvcAuthSample
 {
-
 	public class CachingAppTenantResolver : MemoryCacheTenantResolver<AppTenant>
     {
         private readonly IEnumerable<AppTenant> tenants;
