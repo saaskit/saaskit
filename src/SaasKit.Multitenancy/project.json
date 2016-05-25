@@ -1,28 +1,46 @@
 {
-  "version": "1.1.1-alpha",
+  "version": "1.1.2-rc2",
   "description": "Multi-tenancy support for ASP.NET Core.",
-  "authors": [ "Ben Foster" ],
-  "tags": [ "Multi-tenancy", "Multi-tenant", "Saas" ],
-  "copyright": "Copyright © Ben Foster",
-  "projectUrl": "http://saaskit.net",
-  "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
-  "dependencies": {
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final"
+  "copyright": "Copyright Â© Ben Foster",
+  "packOptions": {
+    "authors": [ "Ben Foster" ],
+    "owners": [ "Ben Foster" ],
+    "tags": [ "Multi-tenancy", "Multi-tenant", "Saas" ],
+    "releaseNotes": "Updated to support ASP.NET Core RC-2",
+    "projectUrl": "http://saaskit.net",
+    "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/saaskit/saaskit/"
+    }
   },
+	"dependencies": {
+		"Microsoft.AspNetCore.Http": "1.0.0-rc2-final",
+		"Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
+		"Microsoft.AspNetCore.Http.Extensions": "1.0.0-rc2-final",
+		"Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
+		"Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc2-final",
+		"Microsoft.Extensions.Caching.Memory": "1.0.0-rc2-final",
+		"Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-final"
+	},
   "frameworks": {
-    "net451": { },
-    "dotnet5.4": {
+    "net46": { },
+    "netstandard1.5": {
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-rc2-*",
+          "type": "platform"
+        },
+        "Microsoft.CSharp": "4.0.1-rc2-*",
+        "System.Collections": "4.0.11-rc2-*",
+        "System.Linq": "4.1.0-rc2-*",
+        "System.Runtime": "4.1.0-rc2-*",
+        "System.Threading": "4.0.11-rc2-*"
+      },
+      "imports": [
+        "dotnet5.4",
+        "portable-net45+win8"
+      ]
     }
   }
 }

@@ -1,9 +1,9 @@
 ﻿using SaasKit.Multitenancy;
 
-namespace Microsoft.AspNet.Http
+namespace Microsoft.AspNetCore.Http
 {
-    /// <summary>
-    /// Multitenant extensions for <see cref="Microsoft.AspNet.Http.HttpContext"/>.
+	/// <summary>
+    /// Multitenant extensions for <see cref="HttpContext"/>.
     /// </summary>
     public static class MultitenancyHttpContextExtensions
     {

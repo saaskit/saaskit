@@ -1,37 +1,45 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.TestHost;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
+using SaasKit.Multitenancy;
 
 namespace SaasKit.Multitenancy.Tests
 {
-    public class TenantPipelineMiddlewareTests
+
+	public class TenantPipelineMiddlewareTests
     {
         [Fact]
         public async Task Should_create_middleware_per_tenant()
         {
-            var server = TestServer.Create(app =>
-            {
-                app.Use(async (ctx, next) =>
-                {
-                    var name = ctx.Request.Path == "/t1" ? "Tenant 1" : "Tenant 2";
-                    ctx.SetTenantContext(new TenantContext<AppTenant>(new AppTenant { Name = name }));
-                    await next();
-                });
+	        var server = new TestServer(
+		        new WebHostBuilder().Configure(
+			        app =>
+				        {
+					        app.Use(
+						        async (ctx, next) =>
+							        {
+								        var name = ctx.Request.Path == "/t1" ? "Tenant 1" : "Tenant 2";
+								        ctx.SetTenantContext(new TenantContext<AppTenant>(new AppTenant { Name = name }));
+								        await next();
+							        });
 
-                app.UsePerTenant<AppTenant>((context, builder) =>
-                {
-                    builder.UseMiddleware<WriteNameMiddleware>(context.Tenant.Name);
-                });
+					        app.UsePerTenant<AppTenant>(
+						        (context, builder) =>
+							        {
+								        builder.UseMiddleware<WriteNameMiddleware>(context.Tenant.Name);
+							        });
 
-                app.Run(async ctx =>
-                {
-                    ctx.Response.StatusCode = (int)HttpStatusCode.OK;
-                    await ctx.Response.WriteAsync(": Test");
-                });
-            });
+					        app.Run(
+						        async ctx =>
+							        {
+								        ctx.Response.StatusCode = (int)HttpStatusCode.OK;
+								        await ctx.Response.WriteAsync(": Test");
+							        });
+				        }));
 
             var client = server.CreateClient();
 
