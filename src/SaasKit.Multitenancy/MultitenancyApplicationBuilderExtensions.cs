@@ -1,7 +1,7 @@
 ﻿using SaasKit.Multitenancy;
 using SaasKit.Multitenancy.Internal;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
     public static class MultitenancyApplicationBuilderExtensions
     {

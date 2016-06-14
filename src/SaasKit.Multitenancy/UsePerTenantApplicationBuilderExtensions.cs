@@ -2,9 +2,9 @@
 using SaasKit.Multitenancy.Internal;
 using System;
 
-namespace Microsoft.AspNet.Builder
+namespace Microsoft.AspNetCore.Builder
 {
-    public static class UsePerTenantApplicationBuilderExtensions
+	public static class UsePerTenantApplicationBuilderExtensions
     {
         public static IApplicationBuilder UsePerTenant<TTenant>(this IApplicationBuilder app, Action<TenantPipelineBuilderContext<TTenant>, IApplicationBuilder> configuration)
         {

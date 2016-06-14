@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -49,6 +49,11 @@ namespace SaasKit.Multitenancy
             // Obtain the key used to identify cached tenants from the current request
             var cacheKey = GetContextIdentifier(context);
 
+            if (cacheKey == null)
+            {
+                return null;
+            }
+
             var tenantContext = cache.Get(cacheKey) as TenantContext<TTenant>;
 
             if (tenantContext == null)
@@ -59,13 +64,17 @@ namespace SaasKit.Multitenancy
                 if (tenantContext != null)
                 {
                     var tenantIdentifiers = GetTenantIdentifiers(tenantContext);
-                    var cacheEntryOptions = CreateCacheEntryOptions();
 
-                    log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
-
-                    foreach (var identifier in tenantIdentifiers)
+                    if (tenantIdentifiers != null)
                     {
-                        cache.Set(identifier, tenantContext, cacheEntryOptions);
+                        var cacheEntryOptions = CreateCacheEntryOptions();
+
+                        log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
+
+                        foreach (var identifier in tenantIdentifiers)
+                        {
+                            cache.Set(identifier, tenantContext, cacheEntryOptions);
+                        }
                     }
                 }
             }

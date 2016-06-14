@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AspNetMvcSample.Models;
 using AspNetMvcSample.Services;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 using SaasKit.Multitenancy;
 using Microsoft.Extensions.Logging.Console;
-using Microsoft.AspNet.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace AspNetMvcSample
 {
@@ -24,7 +24,8 @@ namespace AspNetMvcSample
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
@@ -44,20 +45,16 @@ namespace AspNetMvcSample
         {
             services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
 
-            // Add framework services.
-            //services.AddEntityFramework()
-            //    .AddSqlServer()
-            //    .AddDbContext<SqlServerApplicationDbContext>();
+			// Add framework services.
+			//services.AddEntityFrameworkSqlServer().AddDbContext<SqlServerApplicationDbContext>();
 
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<SqlServerApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
+			//services.AddIdentity<ApplicationUser, IdentityRole>()
+			//	.AddEntityFrameworkStores<SqlServerApplicationDbContext>()
+			//	.AddDefaultTokenProviders();
 
-            services.AddEntityFramework()
-                .AddSqlite()
-                .AddDbContext<SqliteApplicationDbContext>();
+			services.AddEntityFrameworkSqlite().AddDbContext<SqliteApplicationDbContext>();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+			services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<SqliteApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -80,7 +77,6 @@ namespace AspNetMvcSample
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Debug;
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));           
             loggerFactory.AddDebug(LogLevel.Debug);
 
@@ -106,9 +102,7 @@ namespace AspNetMvcSample
                 }
                 catch { }
             }
-
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
-
+			
             app.UseStaticFiles();
 
             app.UseMultitenancy<AppTenant>();
@@ -124,8 +118,5 @@ namespace AspNetMvcSample
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
