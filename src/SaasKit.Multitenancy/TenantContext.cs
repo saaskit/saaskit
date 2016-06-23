@@ -38,7 +38,9 @@ namespace SaasKit.Multitenancy
                 {
                     TryDisposeProperty(prop.Value as IDisposable);
                 }
-            }
+
+				TryDisposeProperty(Tenant as IDisposable);
+			}
 
             disposed = true;
         }
