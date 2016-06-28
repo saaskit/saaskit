@@ -14,25 +14,22 @@
 			"url": "https://github.com/saaskit/saaskit/"
 		}
 	},
-	"dependencies": {
-		"Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
-		"Microsoft.AspNetCore.Http.Extensions": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Caching.Memory": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc2-final",
-		"StructureMap.Dnx": "0.5.1-rc1-final",
-		"SaasKit.Multitenancy": { "target": "project" }
-	},
+    "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+        "Microsoft.AspNetCore.Http.Extensions": "1.0.0",
+        "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+        "Microsoft.Extensions.Caching.Memory": "1.0.0",
+        "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+        "StructureMap.Dnx": "0.5.1-rc2-final",
+        "SaasKit.Multitenancy": { "target": "project" }
+    },
   "frameworks": {
     "net46": { },
     "net452": { },
     "net451": { },
-    "netstandard1.5": {
+    "netstandard1.6": {
       "dependencies": {
-        "Microsoft.NETCore.App": {
-          "version": "1.0.0-rc2-*",
-          "type": "platform"
-        },
         "Microsoft.CSharp": "4.0.1-rc2-*",
         "System.Collections": "4.0.11-rc2-*",
         "System.Linq": "4.1.0-rc2-*",
