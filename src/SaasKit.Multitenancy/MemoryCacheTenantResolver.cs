@@ -36,8 +36,8 @@ namespace SaasKit.Multitenancy
 		    var cacheEntryOptions = CreateCacheEntryOptions();
 
 		    if (DisposeTenantOnExpiration)
-			{
-				var changeToken = new CancellationTokenSource();
+		    {
+			    var changeToken = new CancellationTokenSource();
 
 				cacheEntryOptions
 					.RegisterPostEvictionCallback(
