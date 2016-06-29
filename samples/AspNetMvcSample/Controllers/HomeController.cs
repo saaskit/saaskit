@@ -4,16 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SaasKit.Multitenancy;
 
 namespace AspNetMvcSample.Controllers
 {
-    public class HomeController : Controller
-    {
-        private AppTenant tenant;
 
-        public HomeController(AppTenant tenant)
+	public class HomeController : Controller
+    {
+        private readonly AppTenant tenant;
+
+        public HomeController(ITenant<AppTenant> tenant)
         {
-            this.tenant = tenant;
+            this.tenant = tenant?.Value;
         }
 
         public IActionResult Index()

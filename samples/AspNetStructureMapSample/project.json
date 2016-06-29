@@ -23,12 +23,13 @@
             }
         }
     },
-    "tools": {
-        "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
-            "version": "1.0.0-preview2-final",
-            "imports": "portable-net45+win8+dnxcore50"
-        }
-    },
+	"tools": {
+		"BundlerMinifier.Core": "2.0.238",
+		"Microsoft.AspNetCore.Server.IISIntegration.Tools": {
+			"version": "1.0.0-preview2-final",
+			"imports": "portable-net45+win8+dnxcore50"
+		}
+	},
     "buildOptions": {
         "emitEntryPoint": true,
         "preserveCompilationContext": true
@@ -49,8 +50,8 @@
             "web.config"
         ]
     },
-    "scripts": {
-        "prepublish": [ "bower install", "dotnet bundle" ],
-        "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-    }
+	"scripts": {
+		"prepublish": [ "bower install", "dotnet bundle" ],
+		"postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SaasKit.Multitenancy
 {
-    public class TenantContext<TTenant> : IDisposable
+	public class TenantContext<TTenant> : IDisposable
     {
         private bool disposed;
 
