@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.Internal
 {
-	using System;
-
 	public class TenantResolutionMiddleware<TTenant>
     {
         private readonly RequestDelegate next;

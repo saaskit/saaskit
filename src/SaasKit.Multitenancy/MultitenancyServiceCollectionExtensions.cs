@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SaasKit.Multitenancy;
+using SaasKit.Multitenancy.Internal;
 using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-	using SaasKit.Multitenancy.Internal;
-
-	public static class MultitenancyServiceCollectionExtensions
+    public static class MultitenancyServiceCollectionExtensions
     {
         public static IServiceCollection AddMultitenancy<TTenant, TResolver>(this IServiceCollection services)
             where TResolver : class, ITenantResolver<TTenant>
