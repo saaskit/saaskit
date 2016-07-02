@@ -27,6 +27,7 @@
 		}
 	},
 	"tools": {
+		"BundlerMinifier.Core": "2.0.238",
 		"Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
 	},
     "buildOptions": {
@@ -50,6 +51,7 @@
         ]
 	},
 	"scripts": {
+		"prepublish": [ "bower install", "dotnet bundle" ],
 		"postpublish": "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
 	}
 }

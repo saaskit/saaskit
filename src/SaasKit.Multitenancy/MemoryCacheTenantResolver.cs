@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy
 {
-    public abstract class MemoryCacheTenantResolver<TTenant> : ITenantResolver<TTenant>
+	using System.Threading;
+
+	using Microsoft.Extensions.Primitives;
+
+	public abstract class MemoryCacheTenantResolver<TTenant> : ITenantResolver<TTenant>
     {
         protected readonly IMemoryCache cache;
         protected readonly ILogger log;
@@ -24,10 +28,31 @@ namespace SaasKit.Multitenancy
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
             return new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(new TimeSpan(1, 0, 0))
-                .RegisterPostEvictionCallback((key, value, reason, state) 
-                    => DisposeTenantContext(key, value as TenantContext<TTenant>));
+                .SetSlidingExpiration(new TimeSpan(1, 0, 0));
         }
+
+	    private MemoryCacheEntryOptions GetCacheEntryOptions()
+	    {
+		    var cacheEntryOptions = CreateCacheEntryOptions();
+
+		    if (DisposeTenantOnExpiration)
+		    {
+			    var changeToken = new CancellationTokenSource();
+
+				cacheEntryOptions
+					.RegisterPostEvictionCallback(
+						(key, value, reason, state) =>
+							{
+								DisposeTenantContext(key, value as TenantContext<TTenant>);
+								changeToken.Cancel();
+							})
+					.AddExpirationToken(new CancellationChangeToken(changeToken.Token));
+			}
+
+		    return cacheEntryOptions;
+	    }
+
+		protected virtual bool DisposeTenantOnExpiration => true;
 
         protected virtual void DisposeTenantContext(object cacheKey, TenantContext<TTenant> tenantContext)
         {
@@ -67,9 +92,9 @@ namespace SaasKit.Multitenancy
 
                     if (tenantIdentifiers != null)
                     {
-                        var cacheEntryOptions = CreateCacheEntryOptions();
+                        var cacheEntryOptions = GetCacheEntryOptions();
 
-                        log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
+						log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
 
                         foreach (var identifier in tenantIdentifiers)
                         {

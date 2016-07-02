@@ -88,8 +88,8 @@
             "web.config"
         ]
     },
-    "scripts": {
-        "prepublish": [ "bower install", "dotnet bundle" ],
-        "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-    }
+	"scripts": {
+		"prepublish": [ "bower install", "dotnet bundle" ],
+		"postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+	}
 }
