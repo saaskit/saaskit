@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
 			services.AddScoped(prov => prov.GetService<TenantContext<TTenant>>()?.Tenant);
 
 			// Make ITenant injectable for handling null injection, similar to IOptions
-			services.AddScoped<ITenant<TTenant>>(prov => new Tenant<TTenant>(prov.GetService<TTenant>()));
+			services.AddScoped<ITenant<TTenant>>(prov => new TenantWrapper<TTenant>(prov.GetService<TTenant>()));
 
 			// Ensure caching is available for caching resolvers
 			var resolverType = typeof(TResolver);
