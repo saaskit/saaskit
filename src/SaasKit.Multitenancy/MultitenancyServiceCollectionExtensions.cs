@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-	using SaasKit.Multitenancy.Internal;
+    using SaasKit.Multitenancy.Internal;
 
-	public static class MultitenancyServiceCollectionExtensions
+    public static class MultitenancyServiceCollectionExtensions
     {
         public static IServiceCollection AddMultitenancy<TTenant, TResolver>(this IServiceCollection services)
             where TResolver : class, ITenantResolver<TTenant>
@@ -20,12 +20,15 @@ namespace Microsoft.Extensions.DependencyInjection
             // No longer registered by default as of ASP.NET Core RC2
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-			// Make Tenant and TenantContext injectable
-			services.AddScoped(prov => prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
-			services.AddScoped(prov => prov.GetService<TenantContext<TTenant>>()?.Tenant);
+            // Make Tenant and TenantContext injectable
+            services.AddScoped(prov => prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
+            services.AddScoped(prov => prov.GetService<TenantContext<TTenant>>()?.Tenant);
 
-			// Ensure caching is available for caching resolvers
-			var resolverType = typeof(TResolver);
+            // Make ITenant injectable for handling null injection, similar to IOptions
+            services.AddScoped<ITenant<TTenant>>(prov => new Tenant<TTenant>(prov.GetService<TTenant>()));
+
+            // Ensure caching is available for caching resolvers
+            var resolverType = typeof(TResolver);
             if (typeof(MemoryCacheTenantResolver<TTenant>).IsAssignableFrom(resolverType))
             {
                 services.AddMemoryCache();

@@ -1,12 +1,12 @@
 ﻿{
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Multi-tenancy support for ASP.NET Core using StructureMap.",
   "authors": [ "Ben Foster" ],
     "packOptions": {
         "authors": [ "Ben Foster" ],
         "owners": [ "Ben Foster" ],
         "tags": [ "Multi-tenancy", "Multitenant", "Multitenancy", "Multitenant", "Saas", "StructureMap" ],
-        "releaseNotes": "Resolves an issue with MemoryCache cache dependencies.",
+        "releaseNotes": "Add support for Null Tenant injection through ITenant interface, similar to IOptions interface.",
         "projectUrl": "http://saaskit.net",
         "licenseUrl": "https://github.com/saaskit/saaskit/blob/master/LICENSE.md",
         "requireLicenseAcceptance": false,
