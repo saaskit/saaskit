@@ -13,35 +13,22 @@ namespace SaasKit.Multitenancy
     {
         protected readonly IMemoryCache cache;
         protected readonly ILogger log;
+        protected readonly MemoryCacheTenantResolverOptions options;
 
         public MemoryCacheTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory)
+            : this(cache, loggerFactory, new MemoryCacheTenantResolverOptions())
+        {
+        }
+
+        public MemoryCacheTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory, MemoryCacheTenantResolverOptions options)
         {
             Ensure.Argument.NotNull(cache, nameof(cache));
             Ensure.Argument.NotNull(loggerFactory, nameof(loggerFactory));
+            Ensure.Argument.NotNull(options, nameof(options));
 
             this.cache = cache;
             this.log = loggerFactory.CreateLogger<MemoryCacheTenantResolver<TTenant>>();
-        }
-
-        protected virtual MemoryCacheEntryOptions GetCacheEntryOptions()
-        {
-            var cacheEntryOptions = CreateCacheEntryOptions();
-
-            if (DisposeTenantOnExpiration)
-            {
-                var tokenSource = new CancellationTokenSource();
-
-                cacheEntryOptions
-                    .RegisterPostEvictionCallback(
-                        (key, value, reason, state) =>
-                            {
-                                DisposeTenantContext(key, value as TenantContext<TTenant>);
-                                tokenSource.Cancel();
-                            })
-                    .AddExpirationToken(new CancellationChangeToken(tokenSource.Token));
-            }
-
-            return cacheEntryOptions;
+            this.options = options;
         }
 
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
@@ -49,8 +36,6 @@ namespace SaasKit.Multitenancy
             return new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(new TimeSpan(1, 0, 0));
         }
-
-        protected virtual bool DisposeTenantOnExpiration => true;
 
         protected virtual void DisposeTenantContext(object cacheKey, TenantContext<TTenant> tenantContext)
         {
@@ -107,6 +92,36 @@ namespace SaasKit.Multitenancy
             }
 
             return tenantContext;
+        }
+
+        private MemoryCacheEntryOptions GetCacheEntryOptions()
+        {
+            var cacheEntryOptions = CreateCacheEntryOptions();
+
+            if (options.EvictAllEntriesOnExpiry)
+            {
+                var tokenSource = new CancellationTokenSource();
+
+                cacheEntryOptions
+                    .RegisterPostEvictionCallback(
+                        (key, value, reason, state) =>
+                        {
+                            tokenSource.Cancel();
+                        })
+                    .AddExpirationToken(new CancellationChangeToken(tokenSource.Token));
+            }
+
+            if (options.DisposeOnEviction)
+            {
+                cacheEntryOptions
+                    .RegisterPostEvictionCallback(
+                        (key, value, reason, state) =>
+                        {
+                            DisposeTenantContext(key, value as TenantContext<TTenant>);
+                        });
+            }
+
+            return cacheEntryOptions;
         }
     }
 }
