@@ -82,6 +82,7 @@ namespace AspNetMvcAuthSample
 
 						ClientId = clientId,
 						ClientSecret = clientSecret
+
 					});
 				}
 			});
