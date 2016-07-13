@@ -72,13 +72,20 @@ namespace SaasKit.Multitenancy.Tests
 
             var tenantContext = await harness.Resolver.ResolveAsync(context);
 
-            TenantContext<TestTenant> cachedTenant;
+            TenantContext<TestTenant> cachedTenant = null;
 
-            Thread.Sleep(3 * 1000);
+			Thread.Sleep(1000);
 
-            Assert.False(harness.Cache.TryGetValue("/pear", out cachedTenant));
-            Assert.True(tenantContext.Tenant.Disposed);
-            Assert.Null(cachedTenant);
+			// force MemoryCache to examine itself cache for pending evictions
+			harness.Cache.Get("/foobar");
+
+			// and give it a moment to works its magic
+			Thread.Sleep(100);
+
+			// should also expire tenant context by default
+			Assert.False(harness.Cache.TryGetValue("/apple", out cachedTenant), "Apple Exists");
+			Assert.True(tenantContext.Tenant.Disposed);
+			Assert.Null(cachedTenant);
         }
 
         [Fact]
@@ -99,21 +106,18 @@ namespace SaasKit.Multitenancy.Tests
             // expire apple
             harness.Cache.Remove("/apple");
 
-            // look it up again so it registers
-            harness.Cache.TryGetValue("/apple", out cachedTenant);
+			Thread.Sleep(500);
 
-            // need to spin up a new task as "long running"
-            // so that MemoryCache can fire the eviction callbacks first
-            await Task.Factory.StartNew(state =>
-            {
-                Thread.Sleep(500);
+			// look it up again so it registers
+			harness.Cache.TryGetValue("/apple", out cachedTenant);
 
-                // pear is expired - because apple is
-                Assert.False(harness.Cache.TryGetValue("/pear", out cachedTenant), "Pear Exists");
-                // should also expire tenant context by default
-                Assert.True(tenantContext.Tenant.Disposed);
+			Thread.Sleep(500);
 
-            }, this, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext());
+			// pear is expired - because apple is
+			Assert.False(harness.Cache.TryGetValue("/pear", out cachedTenant), "Pear Exists");
+
+			// should also expire tenant context by default
+			Assert.True(tenantContext.Tenant.Disposed);
         }
 
         [Fact]
@@ -140,23 +144,44 @@ namespace SaasKit.Multitenancy.Tests
 
             // pear is not expired
             Assert.True(harness.Cache.TryGetValue("/pear", out cachedTenant), "Pear Does Not Exist");
-        }
+		}
 
-        [Fact]
-        public async Task Can_not_dispose_on_eviction()
-        {
-            var harness = new TestHarness(cacheExpirationInSeconds: 1, disposeOnEviction: false);
-            var context = CreateContext("/apple");
+		[Fact]
+		public async Task Can_dispose_on_eviction()
+		{
+			var harness = new TestHarness(cacheExpirationInSeconds: 1, disposeOnEviction: true);
+			var context = CreateContext("/apple");
 
-            var tenantContext = await harness.Resolver.ResolveAsync(context);
+			var tenantContext = await harness.Resolver.ResolveAsync(context);
 
-            Thread.Sleep(3 * 1000);
+			Thread.Sleep(2 * 1000);
+			// access it again so that MemoryCache examines it's cache for pending evictions
+			harness.Cache.Get("/foobar");
 
-            Assert.False(tenantContext.Tenant.Disposed);
-        }
+			Thread.Sleep(1 * 1000);
+			// access it again and we should see the eviction
+			Assert.True(tenantContext.Tenant.Disposed);
+		}
+
+		[Fact]
+		public async Task Can_not_dispose_on_eviction()
+		{
+			var harness = new TestHarness(cacheExpirationInSeconds: 1, disposeOnEviction: false);
+			var context = CreateContext("/apple");
+
+			var tenantContext = await harness.Resolver.ResolveAsync(context);
+
+			Thread.Sleep(1 * 1000);
+			// access it again so that MemoryCache examines it's cache for pending evictions
+			harness.Cache.Get("/foobar");
+
+			Thread.Sleep(1 * 1000);
+			// access it again and even though it's disposed, it should not be evicted
+			Assert.False(tenantContext.Tenant.Disposed);
+		}
 
 
-        class TestTenant : IDisposable
+		class TestTenant : IDisposable
         {
             public bool Disposed { get; set; }
 
