@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy
@@ -11,22 +13,28 @@ namespace SaasKit.Multitenancy
     {
         protected readonly IMemoryCache cache;
         protected readonly ILogger log;
+        protected readonly MemoryCacheTenantResolverOptions options;
 
         public MemoryCacheTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory)
+            : this(cache, loggerFactory, new MemoryCacheTenantResolverOptions())
+        {
+        }
+
+        public MemoryCacheTenantResolver(IMemoryCache cache, ILoggerFactory loggerFactory, MemoryCacheTenantResolverOptions options)
         {
             Ensure.Argument.NotNull(cache, nameof(cache));
             Ensure.Argument.NotNull(loggerFactory, nameof(loggerFactory));
+            Ensure.Argument.NotNull(options, nameof(options));
 
             this.cache = cache;
             this.log = loggerFactory.CreateLogger<MemoryCacheTenantResolver<TTenant>>();
+            this.options = options;
         }
 
         protected virtual MemoryCacheEntryOptions CreateCacheEntryOptions()
         {
             return new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(new TimeSpan(1, 0, 0))
-                .RegisterPostEvictionCallback((key, value, reason, state) 
-                    => DisposeTenantContext(key, value as TenantContext<TTenant>));
+                .SetSlidingExpiration(new TimeSpan(1, 0, 0));
         }
 
         protected virtual void DisposeTenantContext(object cacheKey, TenantContext<TTenant> tenantContext)
@@ -67,7 +75,7 @@ namespace SaasKit.Multitenancy
 
                     if (tenantIdentifiers != null)
                     {
-                        var cacheEntryOptions = CreateCacheEntryOptions();
+                        var cacheEntryOptions = GetCacheEntryOptions();
 
                         log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
 
@@ -84,6 +92,36 @@ namespace SaasKit.Multitenancy
             }
 
             return tenantContext;
+        }
+
+        private MemoryCacheEntryOptions GetCacheEntryOptions()
+        {
+            var cacheEntryOptions = CreateCacheEntryOptions();
+
+            if (options.EvictAllEntriesOnExpiry)
+            {
+                var tokenSource = new CancellationTokenSource();
+
+                cacheEntryOptions
+                    .RegisterPostEvictionCallback(
+                        (key, value, reason, state) =>
+                        {
+                            tokenSource.Cancel();
+                        })
+                    .AddExpirationToken(new CancellationChangeToken(tokenSource.Token));
+            }
+
+            if (options.DisposeOnEviction)
+            {
+                cacheEntryOptions
+                    .RegisterPostEvictionCallback(
+                        (key, value, reason, state) =>
+                        {
+                            DisposeTenantContext(key, value as TenantContext<TTenant>);
+                        });
+            }
+
+            return cacheEntryOptions;
         }
     }
 }
