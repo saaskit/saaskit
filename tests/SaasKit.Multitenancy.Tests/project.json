@@ -14,7 +14,7 @@
 
 	"testRunner": "xunit",
 	"dependencies": {
-		"xunit": "2.2.0-beta2-build3254",
+		"xunit": "2.2.0-beta2-*",
 		"Microsoft.AspNetCore.Http": "1.0.0",
 		"Microsoft.AspNetCore.Hosting": "1.0.0",
 		"Microsoft.AspNetCore.TestHost": "1.0.0",
@@ -24,7 +24,8 @@
 			"version": "2.2.0-preview2-build1029",
 			"target": "package"
 		},
-		"Microsoft.NETCore.Platforms": "1.0.1"
+		"Microsoft.NETCore.Platforms": "1.0.1",
+		"Microsoft.Extensions.Logging.Console": "1.0.0"
 	},
 	"frameworks": {
 		/*"net46": {
@@ -35,14 +36,14 @@
 		"netcoreapp1.0": {
 			"dependencies": {
 				"Microsoft.NETCore.App": {
-					"version": "1.0.0-rc2-*",
+					"version": "1.0.0",
 					"type": "platform"
 				},
-				"Microsoft.CSharp": "4.0.1-rc2-*",
-				"System.Collections": "4.0.11-rc2-*",
-				"System.Linq": "4.1.0-rc2-*",
-				"System.Runtime": "4.1.0-rc2-*",
-				"System.Threading": "4.0.11-rc2-*"
+				"Microsoft.CSharp": "4.0.1",
+				"System.Collections": "4.0.11",
+				"System.Linq": "4.1.0",
+				"System.Runtime": "4.1.0",
+				"System.Threading": "4.0.11"
 			},
 			"imports": [
 				"dnxcore50",

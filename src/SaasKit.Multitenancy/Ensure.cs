@@ -4,9 +4,12 @@ using System.Linq;
 
 namespace SaasKit.Multitenancy
 {
-    /// <summary>
+	using System.Diagnostics;
+
+	/// <summary>
     /// Helper class that will throw exceptions when conditions are not satisfied.
     /// </summary>
+    [DebuggerStepThrough]
     public static class Ensure
     {
         /// <summary>
