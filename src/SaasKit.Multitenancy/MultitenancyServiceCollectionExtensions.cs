@@ -21,10 +21,15 @@ namespace Microsoft.Extensions.DependencyInjection
 
 			// Make Tenant and TenantContext injectable
 			services.AddScoped(prov => prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());
-			services.AddScoped(prov => prov.GetService<TenantContext<TTenant>>()?.Tenant);
+            services.AddScoped(prov =>
+            {
+                // WARNING don't resolve TenantContext here, see https://github.com/saaskit/saaskit/issues/68
+                var context = prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>();
+                return context?.Tenant;
+            });
 
-			// Make ITenant injectable for handling null injection, similar to IOptions
-			services.AddScoped<ITenant<TTenant>>(prov => new TenantWrapper<TTenant>(prov.GetService<TTenant>()));
+            // Make ITenant injectable for handling null injection, similar to IOptions
+            services.AddScoped<ITenant<TTenant>>(prov => new TenantWrapper<TTenant>(prov.GetService<TTenant>()));
 
 			// Ensure caching is available for caching resolvers
 			var resolverType = typeof(TResolver);
