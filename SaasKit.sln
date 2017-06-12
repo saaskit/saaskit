@@ -1,32 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3B2A3F2-5EF9-4128-8035-255A1AC1AF7B}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy", "src\SaasKit.Multitenancy\SaasKit.Multitenancy.xproj", "{D4B866A0-FEA9-4279-8AAF-4B71A6FB70BB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{3BF6E052-C932-4DD5-B5C6-3A014282CDF3}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetSample", "samples\AspNetSample\AspNetSample.xproj", "{A4ECD7AC-2007-4BDE-A8D9-E122CAE6EDAC}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetMvcSample", "samples\AspNetMvcSample\AspNetMvcSample.xproj", "{66DE6E51-4668-4DBE-81A8-F6033C30F7CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{485AA823-29AD-4346-8857-331F81A3713C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.xproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaasKit.Multitenancy", "src\SaasKit.Multitenancy\SaasKit.Multitenancy.csproj", "{D4B866A0-FEA9-4279-8AAF-4B71A6FB70BB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.StructureMap", "src\SaasKit.Multitenancy.StructureMap\SaasKit.Multitenancy.StructureMap.xproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetSample", "samples\AspNetSample\AspNetSample.csproj", "{A4ECD7AC-2007-4BDE-A8D9-E122CAE6EDAC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetMvcAuthSample", "samples\AspNetMvcAuthDemo\AspNetMvcAuthSample.xproj", "{FE7C68EC-5A31-4C31-A4EC-2E041C20483C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetMvcSample", "samples\AspNetMvcSample\AspNetMvcSample.csproj", "{66DE6E51-4668-4DBE-81A8-F6033C30F7CF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetStructureMapSample", "samples\AspNetStructureMapSample\AspNetStructureMapSample.xproj", "{7CD02227-F58B-4050-88F3-3ED06FE54FFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.csproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaasKit.Multitenancy.StructureMap", "src\SaasKit.Multitenancy.StructureMap\SaasKit.Multitenancy.StructureMap.csproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetMvcAuthDemo", "samples\AspNetMvcAuthDemo\AspNetMvcAuthDemo.csproj", "{FE7C68EC-5A31-4C31-A4EC-2E041C20483C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetStructureMapSample", "samples\AspNetStructureMapSample\AspNetStructureMapSample.csproj", "{7CD02227-F58B-4050-88F3-3ED06FE54FFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
