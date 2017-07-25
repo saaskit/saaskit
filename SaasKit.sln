@@ -1,37 +1,48 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3B2A3F2-5EF9-4128-8035-255A1AC1AF7B}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy", "src\SaasKit.Multitenancy\SaasKit.Multitenancy.xproj", "{D4B866A0-FEA9-4279-8AAF-4B71A6FB70BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy", "src\SaasKit.Multitenancy\SaasKit.Multitenancy.csproj", "{D4B866A0-FEA9-4279-8AAF-4B71A6FB70BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{3BF6E052-C932-4DD5-B5C6-3A014282CDF3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetSample", "samples\AspNetSample\AspNetSample.xproj", "{A4ECD7AC-2007-4BDE-A8D9-E122CAE6EDAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetSample", "samples\AspNetSample\AspNetSample.csproj", "{A4ECD7AC-2007-4BDE-A8D9-E122CAE6EDAC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetMvcSample", "samples\AspNetMvcSample\AspNetMvcSample.xproj", "{66DE6E51-4668-4DBE-81A8-F6033C30F7CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcSample", "samples\AspNetMvcSample\AspNetMvcSample.csproj", "{66DE6E51-4668-4DBE-81A8-F6033C30F7CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{485AA823-29AD-4346-8857-331F81A3713C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.xproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.csproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SaasKit.Multitenancy.StructureMap", "src\SaasKit.Multitenancy.StructureMap\SaasKit.Multitenancy.StructureMap.xproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.StructureMap", "src\SaasKit.Multitenancy.StructureMap\SaasKit.Multitenancy.StructureMap.csproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetMvcAuthSample", "samples\AspNetMvcAuthDemo\AspNetMvcAuthSample.xproj", "{FE7C68EC-5A31-4C31-A4EC-2E041C20483C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetStructureMapSample", "samples\AspNetStructureMapSample\AspNetStructureMapSample.xproj", "{7CD02227-F58B-4050-88F3-3ED06FE54FFD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetStructureMapSample", "samples\AspNetStructureMapSample\AspNetStructureMapSample.csproj", "{7CD02227-F58B-4050-88F3-3ED06FE54FFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{82E13E54-9F23-4CD7-977D-1B9C0D88D8BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backup", "backup", "{7F2CB193-5D5E-4AC9-AB6B-C927F9451745}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy", "src\backup\SaasKit.Multitenancy\SaasKit.Multitenancy.csproj", "{8356433E-13E1-4041-98E1-98DA85764022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcAuthDemo", "samples\AspNetMvcAuthDemo\AspNetMvcAuthDemo.csproj", "{B04B465A-636D-4660-8D0E-560FB4640509}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D4B866A0-FEA9-4279-8AAF-4B71A6FB70BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,6 +73,30 @@ Global
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|x64.ActiveCfg = Debug|x64
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|x64.Build.0 = Debug|x64
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|x86.ActiveCfg = Debug|x86
+		{8356433E-13E1-4041-98E1-98DA85764022}.Debug|x86.Build.0 = Debug|x86
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|x64.ActiveCfg = Release|x64
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|x64.Build.0 = Release|x64
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|x86.ActiveCfg = Release|x86
+		{8356433E-13E1-4041-98E1-98DA85764022}.Release|x86.Build.0 = Release|x86
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x64.ActiveCfg = Debug|x64
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x64.Build.0 = Debug|x64
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x86.ActiveCfg = Debug|x86
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Debug|x86.Build.0 = Debug|x86
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x64.ActiveCfg = Release|x64
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x64.Build.0 = Release|x64
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x86.ActiveCfg = Release|x86
+		{B04B465A-636D-4660-8D0E-560FB4640509}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,5 +107,8 @@ Global
 		{2BD23575-488B-44DB-8966-C45FDBF0E2EF} = {485AA823-29AD-4346-8857-331F81A3713C}
 		{FE7C68EC-5A31-4C31-A4EC-2E041C20483C} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
 		{7CD02227-F58B-4050-88F3-3ED06FE54FFD} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
+		{7F2CB193-5D5E-4AC9-AB6B-C927F9451745} = {82E13E54-9F23-4CD7-977D-1B9C0D88D8BC}
+		{8356433E-13E1-4041-98E1-98DA85764022} = {7F2CB193-5D5E-4AC9-AB6B-C927F9451745}
+		{B04B465A-636D-4660-8D0E-560FB4640509} = {3BF6E052-C932-4DD5-B5C6-3A014282CDF3}
 	EndGlobalSection
 EndGlobal
