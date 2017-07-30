@@ -28,12 +28,6 @@ namespace AspNetMvcSample
 				.AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
-            {
-                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
-            }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -46,20 +40,16 @@ namespace AspNetMvcSample
             services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
 
 			// Add framework services.
-			//services.AddEntityFrameworkSqlServer().AddDbContext<SqlServerApplicationDbContext>();
+			services
+                .AddEntityFrameworkSqlite()
+                .AddDbContext<SqliteApplicationDbContext>();
 
-			//services.AddIdentity<ApplicationUser, IdentityRole>()
-			//	.AddEntityFrameworkStores<SqlServerApplicationDbContext>()
-			//	.AddDefaultTokenProviders();
-
-			services.AddEntityFrameworkSqlite().AddDbContext<SqliteApplicationDbContext>();
-
-			services.AddIdentity<ApplicationUser, IdentityRole>()
+			services
+                .AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<SqliteApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddOptions();
-
             services.AddMvc();
              
             services.Configure<RazorViewEngineOptions>(options =>
@@ -84,29 +74,14 @@ namespace AspNetMvcSample
             {
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-
-                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-                try
-                {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                        .CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<SqlServerApplicationDbContext>()
-                             .Database.Migrate();
-                    }
-                }
-                catch { }
             }
 			
             app.UseStaticFiles();
-
             app.UseMultitenancy<AppTenant>();
-
             app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
