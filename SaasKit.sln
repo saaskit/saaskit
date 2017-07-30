@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetSample", "samples\Asp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcSample", "samples\AspNetMvcSample\AspNetMvcSample.csproj", "{66DE6E51-4668-4DBE-81A8-F6033C30F7CF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{485AA823-29AD-4346-8857-331F81A3713C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{485AA823-29AD-4346-8857-331F81A3713C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Tests", "tests\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.csproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.Tests", "test\SaasKit.Multitenancy.Tests\SaasKit.Multitenancy.Tests.csproj", "{2BD23575-488B-44DB-8966-C45FDBF0E2EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaasKit.Multitenancy.StructureMap", "src\SaasKit.Multitenancy.StructureMap\SaasKit.Multitenancy.StructureMap.csproj", "{B279D429-8CE4-458E-A3CB-355C5E7502B8}"
 EndProject
