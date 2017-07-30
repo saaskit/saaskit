@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Multi-tenancy support for ASP.NET Core using StructureMap.</Description>
+    <VersionPrefix>1.1.4</VersionPrefix>
+    <Authors>Ben Foster</Authors>
+    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <AssemblyName>SaasKit.Multitenancy.StructureMap</AssemblyName>
+    <PackageId>SaasKit.Multitenancy.StructureMap</PackageId>
+    <PackageTags>Multi-tenancy;Multitenant;Multitenancy;Multitenant;Saas;StructureMap</PackageTags>
+    <PackageReleaseNotes>Updated to support ASP.NET Core RTM. Resolves an issue with MemoryCache cache dependencies.</PackageReleaseNotes>
+    <PackageProjectUrl>http://saaskit.net</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/saaskit/saaskit/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/saaskit/saaskit/</RepositoryUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../SaasKit.Multitenancy/SaasKit.Multitenancy.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="1.0.2"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.0.2"/>
+    <PackageReference Include="StructureMap" Version="4.5.1"/>
+  </ItemGroup>
+</Project>

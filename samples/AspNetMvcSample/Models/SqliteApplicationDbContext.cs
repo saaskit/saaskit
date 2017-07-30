@@ -6,9 +6,7 @@ using System.IO;
 
 namespace AspNetMvcSample.Models
 {
-
-	// https://ef.readthedocs.org/en/latest/
-
+    // https://docs.microsoft.com/en-us/ef/
     public class SqliteApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private readonly IHostingEnvironment env;

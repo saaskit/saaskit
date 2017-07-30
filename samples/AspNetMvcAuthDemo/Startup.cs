@@ -17,7 +17,7 @@ namespace AspNetMvcAuthSample
 				.AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
 
-            builder.AddUserSecrets();
+            builder.AddUserSecrets<Startup>();
 
             Configuration = builder.Build();
         }
@@ -68,7 +68,6 @@ namespace AspNetMvcAuthSample
 					CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies"
 				});
 
-
 				// only register for google if ClientId and ClientSecret both exist
 				var clientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"];
 				var clientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"];
@@ -82,7 +81,6 @@ namespace AspNetMvcAuthSample
 
 						ClientId = clientId,
 						ClientSecret = clientSecret
-
 					});
 				}
 			});
