@@ -34,5 +34,8 @@ namespace AspNetMvcAuthSample
         {
             return Name.GetHashCode();
         }
+
+        public string GoogleClientId { get; set; }
+        public string GoogleClientSecret { get; set; }
     }
 }
