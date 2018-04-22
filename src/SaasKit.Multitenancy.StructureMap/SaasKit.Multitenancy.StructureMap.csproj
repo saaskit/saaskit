@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Multi-tenancy support for ASP.NET Core using StructureMap.</Description>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Ben Foster</Authors>
     <AssemblyName>SaasKit.Multitenancy.StructureMap</AssemblyName>
     <PackageId>SaasKit.Multitenancy.StructureMap</PackageId>
