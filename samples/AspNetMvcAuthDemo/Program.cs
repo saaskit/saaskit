@@ -1,21 +1,23 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace AspNetMvcAuthSample
 {
     public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var host = new WebHostBuilder()
-				.UseKestrel()
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseUrls("http://localhost:60000", "http://localhost:60001", "http://localhost:60002", "http://localhost:60003")
-				.UseIISIntegration()
-				.UseStartup<Startup>()
-				.Build();
+    {
+        public static void Main(string[] args)
+        {
+            Console.Title = "AspNetMvcAuthDemo";
+            BuildWebHost(args).Run();
+        }
 
-			host.Run();
-		}
-	}
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:60000", "http://localhost:60001", "http://localhost:60002", "http://localhost:60003")
+                .UseStartup<Startup>()
+                .Build();
+    }
+
 }

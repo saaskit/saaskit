@@ -41,7 +41,7 @@ namespace SaasKit.Multitenancy
         {
             if (tenantContext != null)
             {
-                log.LogDebug("Disposing TenantContext:{id} instance with key \"{cacheKey}\".", tenantContext.Id, cacheKey);
+                log.LogDebug($"Disposing TenantContext:{tenantContext.Id} instance with key \"{cacheKey}\".");
                 tenantContext.Dispose();
             }
         }
@@ -66,7 +66,7 @@ namespace SaasKit.Multitenancy
 
             if (tenantContext == null)
             {
-                log.LogDebug("TenantContext not present in cache with key \"{cacheKey}\". Attempting to resolve.", cacheKey);
+                log.LogDebug($"TenantContext not present in cache with key \"{cacheKey}\". Attempting to resolve.");
                 tenantContext = await ResolveAsync(context);
 
                 if (tenantContext != null)
@@ -77,7 +77,7 @@ namespace SaasKit.Multitenancy
                     {
                         var cacheEntryOptions = GetCacheEntryOptions();
 
-                        log.LogDebug("TenantContext:{id} resolved. Caching with keys \"{tenantIdentifiers}\".", tenantContext.Id, tenantIdentifiers);
+                        log.LogDebug($"TenantContext:{tenantContext.Id} resolved. Caching with keys \"{tenantIdentifiers}\".");
 
                         foreach (var identifier in tenantIdentifiers)
                         {
@@ -88,7 +88,7 @@ namespace SaasKit.Multitenancy
             }
             else
             {
-                log.LogDebug("TenantContext:{id} retrieved from cache with key \"{cacheKey}\".", tenantContext.Id, cacheKey);
+                log.LogDebug($"TenantContext:{tenantContext.Id} retrieved from cache with key \"{cacheKey}\".");
             }
 
             return tenantContext;
