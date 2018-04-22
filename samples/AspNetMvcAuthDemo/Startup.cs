@@ -83,52 +83,7 @@ namespace AspNetMvcAuthSample
 
             app.UsePerTenant<AppTenant>((ctx, builder) =>
 			{
-
                 builder.UseAuthentication();
-
-                /////////////--------- to delete
-                //var x = builder.ApplicationServices.GetService<IConfigureOptions<CookieAuthenticationOptions>>();
-
-                //var y = builder.ApplicationServices.GetService<IConfigureOptions<GoogleOptions>>();
-                //y.Configure(new GoogleOptions()
-                //{
-                //    ClientId = ctx.Tenant.GoogleClientId,
-                //    ClientSecret = ctx.Tenant.GoogleClientSecret
-                //});
-                /////////////--------- to delete
-
-
-
-
-                ////notes:-----------------------moved up
-                //builder.UseCookieAuthentication(new CookieAuthenticationOptions()
-                //{
-                //	AuthenticationScheme = "Cookies",
-                //	LoginPath = new PathString("/account/login"),
-                //	AccessDeniedPath = new PathString("/account/forbidden"),
-                //	AutomaticAuthenticate = true,
-                //	AutomaticChallenge = true,
-                //	CookieName = $"{ctx.Tenant.Id}.AspNet.Cookies"
-                //});
-
-
-                ////notes:-----------------------moved up but it's no longer conditional
-                //// only register for google if ClientId and ClientSecret both exist
-                //var clientId = Configuration[$"{ctx.Tenant.Id}:GoogleClientId"];
-                //var clientSecret = Configuration[$"{ctx.Tenant.Id}:GoogleClientSecret"];
-
-                //if (!string.IsNullOrWhiteSpace(clientId) && !string.IsNullOrWhiteSpace(clientSecret))
-                //{
-                //	builder.UseGoogleAuthentication(new GoogleOptions()
-                //	{
-                //		AuthenticationScheme = "Google",
-                //		SignInScheme = "Cookies",
-
-                //		ClientId = clientId,
-                //		ClientSecret = clientSecret
-
-                //	});
-                //}
             });
 
             app.UseMvc(routes =>

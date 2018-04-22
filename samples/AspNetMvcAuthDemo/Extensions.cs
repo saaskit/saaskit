@@ -49,8 +49,9 @@ namespace AspNetMvcAuthDemo
         private readonly IList<AppTenant> tenants;
         public GoogleOptions myCurrentOptions;
 
-
-        public ConfigureMyGoogleCookie(IHttpContextAccessor contextAccessor, IOptions<MultitenancyOptions> multitenancyOptions)
+        public ConfigureMyGoogleCookie(
+            IHttpContextAccessor contextAccessor, 
+            IOptions<MultitenancyOptions> multitenancyOptions)
         {
             _httpContext = contextAccessor.HttpContext;
             tenants = multitenancyOptions.Value.Tenants;
