@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
@@ -25,19 +24,8 @@ namespace SaasKit.Multitenancy.Tests
 								        await next();
 							        });
 
-					        app.UsePerTenant<AppTenant>(
-						        (context, builder) =>
-							        {
-								        builder.UseMiddleware<WriteNameMiddleware>(context.Tenant.Name);
-							        });
-
-					        app.Run(
-						        async ctx =>
-							        {
-								        ctx.Response.StatusCode = (int)HttpStatusCode.OK;
-								        await ctx.Response.WriteAsync(": Test");
-							        });
-				        }));
+                            app.UsePerTenant<AppTenant>((context, builder) => builder.UseMiddleware<WriteNameMiddleware>(context.Tenant.Name));
+                        }));
 
             var client = server.CreateClient();
 
@@ -67,6 +55,7 @@ namespace SaasKit.Multitenancy.Tests
             public async Task Invoke(HttpContext context)
             {
                 await context.Response.WriteAsync(name);
+                await context.Response.WriteAsync(": Test");
                 await next(context);
             }
         }

@@ -1,5 +1,9 @@
 ﻿using System.IO;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetSample
 {
@@ -7,15 +11,30 @@ namespace AspNetSample
 	{
 		public static void Main(string[] args)
 		{
-			var host = new WebHostBuilder()
-				.UseKestrel()
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseUrls("http://localhost:60000", "http://localhost:60001", "http://localhost:60002", "http://localhost:60003")
-				.UseIISIntegration()
-				.UseStartup<Startup>()
-				.Build();
+			var builder = WebApplication.CreateBuilder(args);
 
-			host.Run();
-		}
+			builder.Services.AddLogging(cfg => cfg.AddConsole());
+			builder.Services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
+
+			var app = builder.Build();
+
+			app.Map("/onboarding", branch => branch.Run(async ctx => await ctx.Response.WriteAsync("Onboarding")));
+			app.UseMultitenancy<AppTenant>();
+			app.Use(async (ctx, next) =>
+			{
+				if (ctx.GetTenant<AppTenant>().Name == "Default")
+				{
+					ctx.Response.Redirect("/onboarding");
+				}
+				else
+				{
+					await next();
+				}
+			});
+
+			app.UseMiddleware<LogTenantMiddleware>();
+
+            app.Run();
+        }
 	}
 }
