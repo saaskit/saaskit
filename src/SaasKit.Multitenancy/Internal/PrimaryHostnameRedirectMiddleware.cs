@@ -47,7 +47,7 @@ namespace SaasKit.Multitenancy.Internal
         }
         private void Redirect(HttpContext context, string primaryHostname)
         {
-            var builder = new UriBuilder(context.Request.GetEncodedUrl())
+            UriBuilder builder = new UriBuilder(context.Request.GetEncodedUrl())
             {
                 Host = primaryHostname
             };
