@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace SaasKit.Multitenancy
+﻿namespace SaasKit.Multitenancy
 {
-	using System.Diagnostics;
+    using System.Diagnostics;
 
-	/// <summary>
+    /// <summary>
     /// Helper class that will throw exceptions when conditions are not satisfied.
     /// </summary>
     [DebuggerStepThrough]

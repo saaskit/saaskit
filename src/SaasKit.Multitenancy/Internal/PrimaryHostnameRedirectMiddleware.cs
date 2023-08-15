@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
-using System;
-using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.Internal
 {
@@ -49,8 +47,10 @@ namespace SaasKit.Multitenancy.Internal
         }
         private void Redirect(HttpContext context, string primaryHostname)
         {
-            var builder = new UriBuilder(context.Request.GetEncodedUrl());
-            builder.Host = primaryHostname;
+            UriBuilder builder = new UriBuilder(context.Request.GetEncodedUrl())
+            {
+                Host = primaryHostname
+            };
 
             context.Response.Redirect(builder.Uri.AbsoluteUri);
             context.Response.StatusCode = permanentRedirect ? StatusCodes.Status301MovedPermanently : StatusCodes.Status302Found;

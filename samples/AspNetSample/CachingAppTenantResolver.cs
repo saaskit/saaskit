@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using SaasKit.Multitenancy;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace AspNetSample
 {

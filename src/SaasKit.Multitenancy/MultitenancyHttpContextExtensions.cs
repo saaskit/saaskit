@@ -21,8 +21,7 @@ namespace Microsoft.AspNetCore.Http
         {
             Ensure.Argument.NotNull(context, nameof(context));
 
-            object tenantContext;
-            if (context.Items.TryGetValue(TenantContextKey, out tenantContext))
+            if (context.Items.TryGetValue(TenantContextKey, out object tenantContext))
             {
                 return tenantContext as TenantContext<TTenant>;
             }
@@ -41,7 +40,7 @@ namespace Microsoft.AspNetCore.Http
                 return tenantContext.Tenant;
             }
 
-            return default(TTenant);
+            return default;
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SaasKit.Multitenancy
+﻿namespace SaasKit.Multitenancy
 {
-	public class TenantContext<TTenant> : IDisposable
+    public class TenantContext<TTenant> : IDisposable
     {
         private bool disposed;
 
@@ -39,13 +36,13 @@ namespace SaasKit.Multitenancy
                     TryDisposeProperty(prop.Value as IDisposable);
                 }
 
-				TryDisposeProperty(Tenant as IDisposable);
+                TryDisposeProperty(Tenant as IDisposable);
 			}
 
             disposed = true;
         }
 
-        private void TryDisposeProperty(IDisposable obj)
+        private static void TryDisposeProperty(IDisposable obj)
         {
             if (obj == null)
             {

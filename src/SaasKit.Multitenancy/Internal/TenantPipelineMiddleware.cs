@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Collections.Concurrent;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Concurrent;
-using System.Threading.Tasks;
 
 namespace SaasKit.Multitenancy.Internal
 {
@@ -13,7 +11,7 @@ namespace SaasKit.Multitenancy.Internal
         private readonly Action<TenantPipelineBuilderContext<TTenant>, IApplicationBuilder> configuration;
 
         private readonly ConcurrentDictionary<TTenant, Lazy<RequestDelegate>> pipelines
-            = new ConcurrentDictionary<TTenant, Lazy<RequestDelegate>>();
+            = new();
 
         public TenantPipelineMiddleware(
             RequestDelegate next, 

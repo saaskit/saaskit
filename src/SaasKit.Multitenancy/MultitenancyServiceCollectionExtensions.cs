@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using SaasKit.Multitenancy;
 using SaasKit.Multitenancy.Internal;
-using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -17,7 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ITenantResolver<TTenant>, TResolver>();
 
             // No longer registered by default as of ASP.NET Core RC2
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
 			// Make Tenant and TenantContext injectable
 			services.AddScoped(prov => prov.GetService<IHttpContextAccessor>()?.HttpContext?.GetTenantContext<TTenant>());

@@ -2,11 +2,6 @@
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SaasKit.Multitenancy.Tests
@@ -42,9 +37,8 @@ namespace SaasKit.Multitenancy.Tests
 
             var tenantContext = await harness.Resolver.ResolveAsync(context);
 
-            TenantContext<TestTenant> cachedTenant;
 
-            Assert.True(harness.Cache.TryGetValue("/apple", out cachedTenant));
+            Assert.True(harness.Cache.TryGetValue("/apple", out TenantContext<TestTenant> cachedTenant));
 
             Assert.Equal(tenantContext.Tenant.Id, cachedTenant.Tenant.Id);
         }
@@ -57,9 +51,8 @@ namespace SaasKit.Multitenancy.Tests
 
             var tenantContext = await harness.Resolver.ResolveAsync(context);
 
-            TenantContext<TestTenant> cachedTenant;
 
-            Assert.True(harness.Cache.TryGetValue("/pear", out cachedTenant));
+            Assert.True(harness.Cache.TryGetValue("/pear", out TenantContext<TestTenant> cachedTenant));
 
             Assert.Equal(tenantContext.Tenant.Id, cachedTenant.Tenant.Id);
         }
@@ -72,18 +65,17 @@ namespace SaasKit.Multitenancy.Tests
 
             var tenantContext = await harness.Resolver.ResolveAsync(context);
 
-            TenantContext<TestTenant> cachedTenant = null;
 
-			Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
-			// force MemoryCache to examine itself cache for pending evictions
-			harness.Cache.Get("/foobar");
+            // force MemoryCache to examine itself cache for pending evictions
+            harness.Cache.Get("/foobar");
 
 			// and give it a moment to works its magic
 			Thread.Sleep(100);
 
 			// should also expire tenant context by default
-			Assert.False(harness.Cache.TryGetValue("/apple", out cachedTenant), "Apple Exists");
+			Assert.False(harness.Cache.TryGetValue("/apple", out TenantContext<TestTenant> cachedTenant), "Apple Exists");
 			Assert.True(tenantContext.Tenant.Disposed);
 			Assert.Null(cachedTenant);
         }
@@ -101,15 +93,14 @@ namespace SaasKit.Multitenancy.Tests
             Assert.NotNull(harness.Cache.Get("/pear"));
             Assert.NotNull(harness.Cache.Get("/grape"));
 
-            TenantContext<TestTenant> cachedTenant;
 
             // expire apple
             harness.Cache.Remove("/apple");
 
-			Thread.Sleep(500);
+            Thread.Sleep(500);
 
 			// look it up again so it registers
-			harness.Cache.TryGetValue("/apple", out cachedTenant);
+			harness.Cache.TryGetValue("/apple", out TenantContext<TestTenant> cachedTenant);
 
 			Thread.Sleep(500);
 
@@ -123,7 +114,6 @@ namespace SaasKit.Multitenancy.Tests
         [Fact]
         public async Task Can_evict_single_cache_entry_of_tenant_context()
         {
-            TenantContext<TestTenant> cachedTenant;
             var harness = new TestHarness(cacheExpirationInSeconds: 2, evictAllOnExpiry: false);
             var context = CreateContext("/apple");
 
@@ -140,7 +130,7 @@ namespace SaasKit.Multitenancy.Tests
             Thread.Sleep(1000);
 
             // apple is expired
-            Assert.False(harness.Cache.TryGetValue("/apple", out cachedTenant), "Apple Exists");
+            Assert.False(harness.Cache.TryGetValue("/apple", out TenantContext<TestTenant> cachedTenant), "Apple Exists");
 
             // pear is not expired
             Assert.True(harness.Cache.TryGetValue("/pear", out cachedTenant), "Pear Does Not Exist");
@@ -259,7 +249,13 @@ namespace SaasKit.Multitenancy.Tests
 
         class TestHarness
         {
-            static ILoggerFactory loggerFactory = new LoggerFactory().AddConsole();
+            static ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddFilter("Microsoft", LogLevel.Warning)
+                       .AddFilter("System", LogLevel.Warning)
+                       .AddFilter("SampleApp.Program", LogLevel.Debug)
+                       .AddConsole();
+            });
 
             public IMemoryCache Cache = new MemoryCache(new MemoryCacheOptions()
             {

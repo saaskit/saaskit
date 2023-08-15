@@ -25,16 +25,14 @@ namespace SaasKit.Multitenancy.StructureMap.Internal
             {
                 var tenantContainer = await GetTenantContainerAsync(tenantContext, builder);
 
-                using (var requestContainer = tenantContainer.GetNestedContainer())
-                {
-                    // Replace the request IServiceProvider created by IServiceScopeFactory
-                    context.RequestServices = requestContainer.GetInstance<IServiceProvider>();
-                    await next.Invoke(context);
-                }
+                using var requestContainer = tenantContainer.GetNestedContainer();
+                // Replace the request IServiceProvider created by IServiceScopeFactory
+                context.RequestServices = requestContainer.GetInstance<IServiceProvider>();
+                await next.Invoke(context);
             }
         }
 
-        private async Task<IContainer> GetTenantContainerAsync(
+        private static async Task<IContainer> GetTenantContainerAsync(
             TenantContext<TTenant> tenantContext, 
             Lazy<ITenantContainerBuilder<TTenant>> builder)
         {

@@ -15,10 +15,12 @@
         "Hosting:Environment": "Development"
       }
     },
-    "web": {
-      "commandName": "web",
+    "TestApp": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:60000;https://localhost:60001;https://localhost:60002",
       "environmentVariables": {
-        "Hosting:Environment": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
