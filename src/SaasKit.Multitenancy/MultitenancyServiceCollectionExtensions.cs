@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SaasKit.Multitenancy;
 using SaasKit.Multitenancy.Internal;
-using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

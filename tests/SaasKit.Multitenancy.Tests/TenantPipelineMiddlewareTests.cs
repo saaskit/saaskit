@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+﻿using System.Net;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
-using System.Net;
-using System.Threading.Tasks;
 using Xunit;
-using SaasKit.Multitenancy;
 
 namespace SaasKit.Multitenancy.Tests
 {
 
-	public class TenantPipelineMiddlewareTests
+    public class TenantPipelineMiddlewareTests
     {
         [Fact]
         public async Task Should_create_middleware_per_tenant()

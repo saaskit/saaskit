@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.*" />
+		<PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.*" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.*" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.*">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.*">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="PasswordGenerator" Version="2.*" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.*">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="6.*">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.*">
+			<TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Scrutor" Version="4.*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="System" />
+		<Using Include="System.Linq" />
+		<Using Include="System.Threading" />
+		<Using Include="System.Threading.Tasks" />
+		<Using Include="System.Collections.Generic" />
+		<Using Include="System.Text.Json" />
+		<Using Include="System.Text.Json.Serialization" />
+	</ItemGroup>
+</Project>
